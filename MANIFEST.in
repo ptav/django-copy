@@ -1,5 +1,7 @@
 include README.md
 include LICENSE
 recursive-include docs *
-recursive-include copy/templates *
-recursive-include copy/templatetags *
+recursive-include cms/templates *
+recursive-include cms/templatetags *
+recursive-include cms/static *
+recursive-include cms/geoip2 *

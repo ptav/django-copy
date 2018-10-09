@@ -1,0 +1,26 @@
+{% extends "cms/base.html" %}
+
+{% block title %}Signout{% endblock %}
+
+{% block cms-content %}
+
+<div class="container">
+
+    <div class="list-group">
+        <div class="list-group-item active text-center">
+            <h1>This is the placeholder template<br>for the root page of django-copy</h1>
+        </div>
+        
+        <div class="list-group-item text-center">
+            <h4>To overide with your page, register a new page in the admin <a href="admin">panel</a> and then register a root URL in the settings folder of your website</h4>
+        </div>
+
+         <div class="list-group-item text-center">
+            <h4>For example you can add the following to the urlpatterns definition:</h4>
+            <code>path('', RedirectView.as_view(url='my_index_page', permanent=False)),</code>
+        </div>
+   </div>
+
+</div>
+
+{% endblock cms-content %}

@@ -1,0 +1,45 @@
+{% load cms static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/media/{{ navbar_logo }}" height="40">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      {% for entry in navbar_items %}
+      {% if entry.dropdown %}
+      <li class="nav-item dropdown {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-{{ entry.label|slugify }}" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{ entry.label }}
+          {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ entry.label|slugify }}">
+          {% for dentry in entry.dropdown %}
+          <a class="dropdown-item" href="{{ dentry.url }}">
+            {{ dentry.label }}
+            {% if dentry.img %}<img class="rounded" src="{{ dentry.img }}" height="35">{% endif %}
+            {% if dentry.faicon %}{% faicon dentry.faicon dentry.label %}{% endif %}
+          </a>
+          {% if dentry.divider %}<div class="dropdown-divider"></div>{% endif %}
+          {% endfor %}
+        </div>
+      </li>
+      {% else %}
+      <li class="nav-item {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
+        <a class="nav-link" href="{{ entry.url }}" title="{{ entry.label }}">
+          {{ entry.label }}
+          {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
+          {% if entry.faicon %}{% faicon entry.faicon entry.label %}{% endif %}
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

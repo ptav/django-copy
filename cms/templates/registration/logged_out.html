@@ -1,0 +1,12 @@
+{% extends "cms/base.html" %}
+
+{% block title %}Signout{% endblock %}
+
+{% block cms-content %}
+    <div class="container">
+      <div class="col-md-6 col-md-offset-3">
+		<h1>Sign Out</h1>
+		<p>You have been logged out. <a href="{% url 'login'%}">Click here to login again.</a>
+      </div>
+    </div>
+{% endblock %}

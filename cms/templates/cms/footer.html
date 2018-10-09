@@ -1,0 +1,21 @@
+{% load cms static %}
+
+<footer class="footer">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-4">
+                    Place your footer links here<br>
+                    &copy; 2018 Pedro Tavares<br>
+                </div>
+                <div class="col-sm-4">
+                    <a href="https://twitter.com/altimapa" target="_blank">{% faicon 'twitter' 'Twitter' %}&ensp;Twitter</a><br>
+                    <a href="https://www.linkedin.com/company/altimapa-limited" target="_blank">{% faicon 'linkedin' 'LinkedIn' %}&ensp;LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="logo"><img src="{% static "img/logo-footer.png" %}" width="100%" alt="Logo"/></span>
+        </div>
+    </div>
+</footer>

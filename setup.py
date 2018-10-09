@@ -1,14 +1,17 @@
 #!/usr/bin/env python
-
+import os
 from setuptools import setup,find_packages
 
+PATH = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(PATH, 'README.md'), encoding='utf-8') as fp:
+    DESC = fp.read()
 
 
 setup(
     name='django-copy',
-    version='0.1',
-    description='Extremely simple CMS for Django',
-    long_description="Probably the smallest and simplest CMS for Django.",
+    version='1.0',
+    description='Probably the smallest and simplest CMS for the Django framework',
+    long_description=DESC,
     keywords='django, cms',
     author='Pedro Tavares',
     author_email='web@ptavares.com',

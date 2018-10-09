@@ -1,0 +1,25 @@
+{% extends "cms/base.html" %}
+{% load i18n bootstrap %}
+
+{% block title %}Login{% endblock %}
+
+{% block cms-content %}
+    <div class="container">
+      <div class="col-md-6 col-md-offset-3">
+
+		<h1>Sign In</h1>
+
+		<form class="login" method="POST" action="{% url 'login' %}">
+		  {% csrf_token %}
+		  {{ form|bootstrap }}
+		  {% if redirect_field_value %}
+		  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+		  {% endif %}
+		  <div class="form-actions">
+		    <button class="btn btn-primary" type="submit">Sign In</button>
+		    <a class="btn" href="{% url 'password_reset' %}">Forgot Password?</a>
+		  </div>
+		</form>
+	  </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "cms/base.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+  <li>{% trans "Error 403" %}</li>
+</ul>
+{% endblock breadcrumbs %}
+
+{% block title %}{% trans "Permission denied" %}{% endblock title %}
+
+{% block body-class %}error-403{% endblock body-class %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-sm-7">
+            <h1>{% trans "Permission denied" %}</h1>
+            <p>{% trans "Sorry, but you don't have the permission to do this action." %}</p>
+        </div>
+    </div>
+
+    {{ block.super }}
+{% endblock content %}
