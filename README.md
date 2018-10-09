@@ -75,7 +75,7 @@ Then setup `LOGIN_URL`, `LOGIN_REDIRECT_URL` and `LOGOUT_REDIRECT_URL`. For exam
 
 ## Open source licenses
 
-This product includes the following software and media packages
+This product depends on the following software and media packages
 
 GeoLite2 data created by MaxMind, available from [http://www.maxmind.com](http://www.maxmind.com)
 
