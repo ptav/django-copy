@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.decorators import decorator_from_middleware
 
 from .middleware import LocalisationMiddleware
@@ -27,7 +27,11 @@ def static_page(request,slug):
 
 
 def index(request):
-    return render(request, "cms/default.html")
+    u = request.user
+    if u.is_superuser or u.is_staff:
+        return redirect('admin:index')
+    else:
+        return render(request, "cms/default.html")
 
 
 
