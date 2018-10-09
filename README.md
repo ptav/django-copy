@@ -81,5 +81,4 @@ GeoLite2 data created by MaxMind, available from [http://www.maxmind.com](http:/
 
 Font Awesome fonts version 4.7 is licensed under [SIL OFL 1.1](http://scripts.sil.org/OFL) and the [MIT License](http://opensource.org/licenses/mit-license.html)
 
-Bootstrap version 4.0
-
+Bootstrap version 4.0 is licensed under the [MIT License](http://opensource.org/licenses/mit-license.html)
