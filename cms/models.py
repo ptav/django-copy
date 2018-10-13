@@ -10,6 +10,8 @@ from django.utils.safestring import mark_safe
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import Group
 
+from simple_history.models import HistoricalRecords
+
 
 
 @python_2_unicode_compatible
@@ -36,6 +38,8 @@ class Page(models.Model):
     description = models.CharField(max_length=255,default='', blank=True)
     keywords = models.CharField(max_length=255,default='', blank=True)
 
+    history = HistoricalRecords()
+
     @property
     def get_title(self):
         return self.title if self.title else self.slug
@@ -50,6 +54,8 @@ class Navbar(models.Model):
     groups = models.ManyToManyField(Group, blank=True, help_text="Associate navbar with a particular user group.")
     elements = JSONField()
     z_index = models.IntegerField(default=0, help_text="The z-index determines the order of navbar items. A higher value appears first.")
+
+    history = HistoricalRecords()
 
 
 
@@ -87,8 +93,9 @@ class Copy(models.Model):
 
     text = models.TextField(max_length=10000)
     format = models.CharField(max_length=1,choices=FORMAT_CHOICES,default=FORMAT_PLAIN)
-
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default=STATUS_DRAFT)
+
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name_plural = 'copy'

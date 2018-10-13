@@ -2,8 +2,6 @@ from django import forms
 from django.shortcuts import redirect
 from django.contrib import admin
 
-import reversion
-from reversion.admin import VersionAdmin
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from .models import Template, Page, Copy, Navbar
@@ -57,11 +55,7 @@ def publish_drafts(modeladmin, request, queryset):
 
         pub.text = obj.text
         pub.format = obj.format
-
-        with reversion.create_revision():
-            pub.save()
-            reversion.set_user(request.user)
-            reversion.set_comment("Publish draft copy")
+        pub.save()
 
         obj.delete()
 
@@ -83,7 +77,7 @@ class CopyAdminForm(forms.ModelForm):
 
 
 @admin.register(Copy)
-class CopyAdmin(VersionAdmin):
+class CopyAdmin(admin.ModelAdmin):
     model = Copy
     form = CopyAdminForm
     actions = (publish_drafts, )
