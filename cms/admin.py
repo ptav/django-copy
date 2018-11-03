@@ -84,7 +84,6 @@ class CopyAdmin(admin.ModelAdmin):
 
     ordering= ('url', 'fieldid', 'locale', 'geo', '-status')
     list_display = ('url', 'fieldid', 'locale', 'geo', 'short_text', 'format', 'status')
-    list_editable = ('status', )
     list_filter = ('status', 'locale', 'geo', 'url', 'fieldid')
     search_fields = ('text', 'locale', 'geo', 'fieldid', 'url')
 
