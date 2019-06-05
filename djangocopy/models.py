@@ -19,7 +19,7 @@ class Template(models.Model):
     "HTML Templates"
 
     label = models.CharField(max_length=255)
-    template = models.FileField(upload_to=settings.CMS_TEMPLATE_ROOT)
+    template = models.FileField(upload_to=settings.djangocopy_TEMPLATE_ROOT)
 
     def __str__(self):
         return self.label
@@ -28,7 +28,7 @@ class Template(models.Model):
 
 @python_2_unicode_compatible
 class Page(models.Model):
-    "Definition for pages managed by the CMS"
+    "Definition for pages managed by the djangocopy"
 
     slug = models.SlugField(max_length=255, unique=True)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
@@ -50,7 +50,7 @@ class Page(models.Model):
 class Navbar(models.Model):
     "Navbar links"
 
-    logo = models.ImageField(null=True, blank=True, upload_to='cms/',help_text="A picture to use as a logo")
+    logo = models.ImageField(null=True, blank=True, upload_to='djangocopy/',help_text="A picture to use as a logo")
     groups = models.ManyToManyField(Group, blank=True, help_text="Associate navbar with a particular user group.")
     elements = JSONField()
     z_index = models.IntegerField(default=0, help_text="The z-index determines the order of navbar items. A higher value appears first.")
@@ -61,7 +61,7 @@ class Navbar(models.Model):
 
 @python_2_unicode_compatible
 class Copy(models.Model):
-    "CMS content"
+    "djangocopy content"
 
     FORMAT_PLAIN = 'p'
     FORMAT_MARKDOWN = 'm'

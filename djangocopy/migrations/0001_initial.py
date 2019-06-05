@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             name='Navbar',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('logo', models.ImageField(blank=True, help_text='A picture to use as a logo', null=True, upload_to='cms/')),
+                ('logo', models.ImageField(blank=True, help_text='A picture to use as a logo', null=True, upload_to='djangocopy/')),
                 ('elements', jsonfield.fields.JSONField()),
                 ('z_index', models.IntegerField(default=0, help_text='The z-index determines the order of navbar items. A higher value appears first.')),
                 ('groups', models.ManyToManyField(blank=True, help_text='Associate navbar with a particular user group.', to='auth.Group')),
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='page',
             name='template',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='cms.Template'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='djangocopy.Template'),
         ),
         migrations.AlterUniqueTogether(
             name='copy',

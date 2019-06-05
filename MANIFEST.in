@@ -1,7 +1,7 @@
 include README.md
 include LICENSE
 recursive-include docs *
-recursive-include cms/templates *
-recursive-include cms/templatetags *
-recursive-include cms/static *
-recursive-include cms/geoip2 *
+recursive-include djangocopy/templates *
+recursive-include djangocopy/templatetags *
+recursive-include djangocopy/static *
+recursive-include djangocopy/geoip2 *

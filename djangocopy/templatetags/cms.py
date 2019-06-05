@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import to_locale, get_language
 
-from cms.models import Page, Copy, Navbar
+from djangocopy.models import Page, Copy, Navbar
 
 register = template.Library()
 
@@ -32,7 +32,7 @@ def faicon(name, aria_text='', options='', aria_hidden=True):
 
 
 
-@register.inclusion_tag('cms/widgets/navbar.html', takes_context=True)
+@register.inclusion_tag('djangocopy/widgets/navbar.html', takes_context=True)
 def navbar(context):
     """
     Generate navbar

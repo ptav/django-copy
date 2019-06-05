@@ -4,7 +4,7 @@ from .views import static_page, index
 
 
 
-app_name = 'cms'
+app_name = 'djangocopy'
 
 urlpatterns = [
     path('<str:slug>/',static_page,name='static'),

@@ -22,7 +22,7 @@ def static_page(request,slug):
     except:
         raise Http404
 
-    return render(request, "cms/wrapper.html", context={'template': template, 'metadata': metadata})
+    return render(request, "djangocopy/wrapper.html", context={'template': template, 'metadata': metadata})
 
 
 
@@ -31,7 +31,7 @@ def index(request):
     if u.is_superuser or u.is_staff:
         return redirect('admin:index')
     else:
-        return render(request, "cms/default.html")
+        return render(request, "djangocopy/default.html")
 
 
 

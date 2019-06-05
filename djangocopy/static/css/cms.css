@@ -3,7 +3,7 @@ html,body {
     margin:0px;
 }
 
-.cms-heading {
+.djangocopy-heading {
     width:100%;
     text-align:center;
     padding: 10px;
@@ -11,14 +11,14 @@ html,body {
     margin-left: 0px;
 }
 
-.cms-panel-light {
+.djangocopy-panel-light {
     width:100%;
     padding: 10px;
     margin-right: 0px;
     margin-left: 0px;
 }
 
-.cms-panel-grey {
+.djangocopy-panel-grey {
     background-color: #f1f1f1;
     width:100%;
     padding: 10px;
