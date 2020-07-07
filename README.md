@@ -37,7 +37,7 @@ While it is extremely simple, it supports some features that I haven't found in 
             ...
         },
     ]
-    ````
+    ```
 
 5. Add `djangocopy.middleware.LocalisationMiddleware` to `MIDDLEWARE` in the project settings file (OR see alternative below)
 
@@ -48,61 +48,61 @@ While it is extremely simple, it supports some features that I haven't found in 
 
 In _settings.py_ add:
 
-    ```
-    INSTALLED_APPS = [
-        'django.contrib.auth',
-        'django.contrib.sites',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'django.contrib.humanize',
-        'django.contrib.sitemaps',
-
-        ...
-
-        'ckeditor',
-        'ckeditor_uploader',
-
-        'simple_history',
-
-        'djangocopy',
-
-        ...
-    ]
+```
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.sites',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.contrib.sitemaps',
 
     ...
 
-    # django.contrib.auth settings
-    #
+    'ckeditor',
+    'ckeditor_uploader',
 
-    LOGIN_URL = '/accounts/login'
-    
-    LOGIN_REDIRECT_URL = '/'
-    
-    LOGOUT_REDIRECT_URL = '/accounts/login'
+    'simple_history',
+
+    'djangocopy',
+
+    ...
+]
+
+...
+
+# django.contrib.auth settings
+#
+
+LOGIN_URL = '/accounts/login'
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
-    # CKEditor
-    #
+# CKEditor
+#
 
-    CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
-    
-    CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
 
-    CKEDITOR_CONFIGS = {
-        ...
-    }
-    ```
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    ...
+}
+```
 
 In _urls.py_ add
 
-    ```
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('filer/', include('filer.urls')),
-    path('djangocopy/', include('djangocopy.urls')),
-    ```
+```
+path('ckeditor/', include('ckeditor_uploader.urls')),
+path('accounts/', include('django.contrib.auth.urls')),
+path('filer/', include('filer.urls')),
+path('djangocopy/', include('djangocopy.urls')),
+```
 
 
 
