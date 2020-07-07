@@ -1,0 +1,56 @@
+html,body {
+    width: 100%;
+    margin:0px;
+}
+
+.djangocopy-heading {
+    width:100%;
+    text-align:center;
+    padding: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.djangocopy-panel-light {
+    width:100%;
+    padding: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.djangocopy-panel-grey {
+    background-color: #f1f1f1;
+    width:100%;
+    padding: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+
+.btn-group-xs > .btn, .btn-xs {
+    padding: .35rem .25rem;
+    font-size: .775rem;
+    line-height: .55;
+    border-radius: .2rem;
+}
+
+.fa.fa-sm {
+    font-size: .875rem;
+    line-height: .75;
+    width: .80rem;
+}
+
+.fa.fa-xs {
+    font-size: .69rem;
+    line-height: .5;
+    width: .6rem;
+}
+
+.btn-group-xs-bold > .btn, .btn-xs-bold {
+    padding: .35rem .25rem;
+    font-size: .775rem;
+    font-weight: bold;
+    line-height: .55;
+    border-radius: .2rem;
+    min-width: 1.2rem;
+}

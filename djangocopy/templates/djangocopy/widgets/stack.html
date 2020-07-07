@@ -1,0 +1,9 @@
+{% for object in object_list %}
+<span {% if element_class %}class="{{ element_class }}" {% endif%}>
+    {% include template %}
+</span><br>
+{% empty %}
+<span {% if element_class %}class="{{ element_class }}" {% endif%}>
+    {% if empty_message %}{{ empty_message }}{% else %}Nothing!{% endif %}
+</span><br>
+{% endfor %}

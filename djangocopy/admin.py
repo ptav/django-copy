@@ -4,16 +4,37 @@ from django.contrib import admin
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Template, Page, Copy, Navbar
+from .models import Template, Image, Page, Copy, Navbar
 
 
+
+ELEMENTS_HELPTEXT = \
+"""
+Simple entry: { 'label':"Home", url:"/" }
+Add image: { 'label':"Logout", url:"/accounts/logout", img:"/avatar.jpg" }
+Add FA icon: { 'label':"Login", url:"/accounts/login", faicon:"fa-signin" }
+Dropdown (and example of divider):  
+    {
+        "label":" ",
+        "img":"/game/useravatar",
+        "dropdown":[
+            { "label":"Profile", "url":"/game/profile", "divider":1 },
+            { "label":"Sign-out", "url":"/accounts/logout" }
+        ]
+    }
+
+"""
 
 @admin.register(Navbar)
 class NavbarAdmin(admin.ModelAdmin):
     model = Navbar
 
-    list_display = ('id', 'get_groups', )
+    list_display = ('label', 'get_groups', )
     autocomplete_fields = ('groups', )
+
+    help_texts = {
+        'elements': ELEMENTS_HELPTEXT,
+    }
 
     def get_groups(self, obj):
         txt = ""
@@ -89,3 +110,4 @@ class CopyAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Template)
+admin.site.register(Image)

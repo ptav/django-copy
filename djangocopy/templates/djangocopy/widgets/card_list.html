@@ -1,0 +1,18 @@
+{% load djangocopy %}
+
+{% uuid collapse_id %}
+
+<div class="card m{% if bmargin %}{{ margin }}{% else %}b-2{% endif %}">
+    <div class="card-header">
+        <h4 class="card-title float-left mb-0">{{ title }}</h4>
+        <a role="button" data-toggle="collapse" href="#collapse-{{ collapse_id }}" aria-expanded="true"
+            aria-controls="collapse-{{ collapse_id }}" style="float:right;color:#0b3959">
+            {% faicon 'caret-down' 'show/hide' 'fa-lg' %}
+        </a>
+    </div>
+    <ul class="list-group list-group-flush collapse show" id="collapse-{{ collapse_id }}">
+        {% for object in object_list %}
+        <li class="list-group-item">{% include template %}</li>
+        {% endfor %}
+    </ul>
+</div>

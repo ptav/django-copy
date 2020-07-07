@@ -11,7 +11,7 @@
 
 {% block body-class %}error-400{% endblock body-class %}
 
-{% block content %}
+{% block djangocopy-content %}
     <div class="container">
         <div class="col-sm-7">
             <h1>{% trans "Bad request" %}</h1>
@@ -19,6 +19,6 @@
         </div>
     </div>
     {{ block.super }}
-{% endblock content %}
+{% endblock djangocopy-content %}
 
 

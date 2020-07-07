@@ -1,0 +1,24 @@
+{% for object in object_list|slice:":4" %}
+<span {% if element_class %}class="{{ element_class }}" {% endif%}>
+    {% include template %}
+</span><br>
+{% empty %}
+<span {% if element_class %}class="{{ element_class }}" {% endif%}>
+    {% if empty_message %}{{ empty_message }}{% else %}Nothing!{% endif %}
+</span><br>
+{% endfor %}
+
+{% with extras=object_list|slice:"4:" %}
+    {% if extras %}
+        <div class="collapse" id="stack-collapse-{{ label }}">
+            {% for object in extras %}
+            <span {% if element_class %}class="{{ element_class }}" {% endif%}>
+                {% include template %}
+            </span><br>
+            {% endfor %}
+        </div>
+        <a role="button" data-toggle="collapse" href="#stack-collapse-{{ label }}" aria-expanded="false" aria-controls="stack-collapse-{{ label }}">
+            more/less...
+        </a>
+    {% endif %}
+{% endwith %}

@@ -1,0 +1,13 @@
+<div class="list-group">
+    {% for object in object_list %}
+        {% if link %}
+            <a class="list-group-item" href="{% url link object.pk %}?next={{ request.path }}">
+                {% include template with exclude_link=1 object=object %}
+            </a>
+        {% else %}
+            <div class="list-group-item">{% include template %}</div>
+        {% endif %}
+    {% empty %}
+        <div class="list-group-item">{% if empty_message %}{{ empty_message }}{% else %}Nothing!<br>{% endif %}</div>
+    {% endfor %}
+</div>

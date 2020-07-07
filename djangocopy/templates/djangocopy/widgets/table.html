@@ -1,0 +1,17 @@
+<table class="table">
+    <tr>
+        {% if headings %}
+            {% for h in headings %}<th>{{ h }}</th>{% endfor %}
+        {% else %}        
+            {% for f in fields %}<th>{{ f }}</th>{% endfor %}
+        {% endif %}
+                
+        {% for o in object_list %}
+            <tr>
+                {% for f in fields %}
+                    <td>{{ o|getattr:f }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tr>
+</table>

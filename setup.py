@@ -9,10 +9,10 @@ with open(os.path.join(PATH, 'README.md'), encoding='utf-8') as fp:
 
 setup(
     name='django-copy',
-    version='1.0',
-    description='Probably the smallest and simplest djangocopy for the Django framework',
+    version='1.1',
+    description='Probably the smallest and simplest CMS for the Django framework',
     long_description=DESC,
-    keywords='django, djangocopy',
+    keywords='Django, CMS',
     author='Pedro Tavares',
     author_email='web@ptavares.com',
     url='https://github.com/ptav/django-copy',

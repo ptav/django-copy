@@ -1,8 +1,8 @@
 {% load djangocopy static %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="/media/{{ navbar_logo }}" height="40">
+  <a class="navbar-brand" href="/">
+    {% if navbar_logo %}<img src="{{ navbar_logo }}" height="60">{% endif %}
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,15 +16,16 @@
       <li class="nav-item dropdown {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
         <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-{{ entry.label|slugify }}" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          {{ entry.label }}
+          {% if entry.faicon %}{% faicon entry.faicon %}{% endif %}
+          {% if entry.label %}{{ entry.label }}{% endif %}
           {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ entry.label|slugify }}">
           {% for dentry in entry.dropdown %}
           <a class="dropdown-item" href="{{ dentry.url }}">
-            {{ dentry.label }}
+            {% if dentry.label %}{{ dentry.label }}{% endif %}
             {% if dentry.img %}<img class="rounded" src="{{ dentry.img }}" height="35">{% endif %}
-            {% if dentry.faicon %}{% faicon dentry.faicon dentry.label %}{% endif %}
+            {% if dentry.faicon %}{% faicon dentry.faicon %}{% endif %}
           </a>
           {% if dentry.divider %}<div class="dropdown-divider"></div>{% endif %}
           {% endfor %}
@@ -32,10 +33,10 @@
       </li>
       {% else %}
       <li class="nav-item {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
-        <a class="nav-link" href="{{ entry.url }}" title="{{ entry.label }}">
-          {{ entry.label }}
+        <a class="nav-link" href="{{ entry.url }}" {% if entry.label %}title="{{ entry.label }}"{% endif %}>
+          {% if entry.faicon %}{% faicon entry.faicon %}{% endif %}
+          {% if entry.label %}{{ entry.label }}{% endif %}
           {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
-          {% if entry.faicon %}{% faicon entry.faicon entry.label %}{% endif %}
         </a>
       </li>
       {% endif %}
@@ -43,3 +44,4 @@
     </ul>
   </div>
 </nav>
+<br>

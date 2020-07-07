@@ -1,0 +1,15 @@
+{% load djangocopy %}
+
+<div class="row">  
+
+{% for cols in object_list|list_to_4_column %}
+    <div class="col-md-3">
+        {% for object in cols %}
+            {% include template %}
+        {% endfor %}
+    </div>
+{% empty %}
+    <p style="text-align:center;'">{% if empty_message %}{{ empty_message }}{% else %}It's empty!{% endif %}</p>
+{% endfor %}
+
+</div>

@@ -18,11 +18,23 @@ from simple_history.models import HistoricalRecords
 class Template(models.Model):
     "HTML Templates"
 
-    label = models.CharField(max_length=255)
-    template = models.FileField(upload_to=settings.djangocopy_TEMPLATE_ROOT)
+    template = models.FileField(upload_to=settings.DJANGOCOPY_TEMPLATES)
+    label = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return self.label
+        return self.label if self.label else self.template.name
+
+
+
+@python_2_unicode_compatible
+class Image(models.Model):
+    "Image Files"
+
+    image = models.ImageField(upload_to=settings.DJANGOCOPY_IMAGES)
+    label = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.label if self.label else self.image.name
 
 
 
@@ -50,7 +62,8 @@ class Page(models.Model):
 class Navbar(models.Model):
     "Navbar links"
 
-    logo = models.ImageField(null=True, blank=True, upload_to='djangocopy/',help_text="A picture to use as a logo")
+    label = models.CharField(max_length=255)
+    logo = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True, help_text="A picture to use as a logo")
     groups = models.ManyToManyField(Group, blank=True, help_text="Associate navbar with a particular user group.")
     elements = JSONField()
     z_index = models.IntegerField(default=0, help_text="The z-index determines the order of navbar items. A higher value appears first.")
