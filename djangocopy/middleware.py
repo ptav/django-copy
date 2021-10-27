@@ -1,13 +1,11 @@
 import os
-
 from django.http import Http404
 from django.utils.translation import to_locale, get_language
 from django.contrib.gis.geoip2 import GeoIP2
 from django.conf import settings
 from .models import Copy
 
-#BASE_PATH = os.path.dirname(os.path.abspath(__file__))
-#GEOIP_PATH = os.path.join(BASE_PATH,'geoip2')
+
 GEOIP_PATH = settings.GEOIP_PATH
 
 
@@ -43,16 +41,16 @@ def ip_to_country_code(addr, default_code='GB'):
     return g.country(addr)['country_code']
 
 
-
 def get_client_country_code(request):
     "Shorthand to request country code directly from request"
     return ip_to_country_code(get_ip_address(request))
 
 
+class LocalisationMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
 
-def LocalisationMiddleware(get_response):
-
-    def middleware(request):
+    def __call__(self, request):
         url = request.path
         locale = to_locale(get_language())
         geo = get_client_country_code(request)
@@ -60,6 +58,4 @@ def LocalisationMiddleware(get_response):
 
         request.copy = Copy.get_for_url(url, locale, geo, draft)
 
-        return get_response(request)
-
-    return middleware
+        return self.get_response(request)
