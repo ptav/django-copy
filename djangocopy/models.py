@@ -7,14 +7,12 @@ from django.db.models import Q
 from django.urls import resolve
 from django.conf import settings
 from django.utils.safestring import mark_safe
-from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import Group
 
 from simple_history.models import HistoricalRecords
 
 
 
-@python_2_unicode_compatible
 class Template(models.Model):
     "HTML Templates"
 
@@ -25,8 +23,6 @@ class Template(models.Model):
         return self.label if self.label else self.template.name
 
 
-
-@python_2_unicode_compatible
 class Image(models.Model):
     "Image Files"
 
@@ -37,8 +33,6 @@ class Image(models.Model):
         return self.label if self.label else self.image.name
 
 
-
-@python_2_unicode_compatible
 class Page(models.Model):
     "Definition for pages managed by the djangocopy"
 
@@ -57,8 +51,6 @@ class Page(models.Model):
         return self.title if self.title else self.slug
 
 
-
-@python_2_unicode_compatible
 class Navbar(models.Model):
     "Navbar links"
 
@@ -71,8 +63,6 @@ class Navbar(models.Model):
     history = HistoricalRecords()
 
 
-
-@python_2_unicode_compatible
 class Copy(models.Model):
     "djangocopy content"
 

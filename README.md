@@ -5,6 +5,10 @@ Probably the smallest and simplest djangocopy for Django.
 While it is extremely simple, it supports some features that I haven't found in other djangocopy frameworks out there. Namely you can create pages for **multiple languages** but also for **multiple locations** or any conbination of both
 
 
+## Usage
+
+
+
 ## Installation
 
 1. Use pip to instal the latest stable release
@@ -16,18 +20,43 @@ While it is extremely simple, it supports some features that I haven't found in 
     You can also install a local copy by running `setup.py install` at the top directory of django-copy
 
 
-2. Add `djangocopy` to `INSTALLED_APPS` in the project settings (see dependencies below)
+2. Add `djangocopy` and dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
 
-3. Setup `DJANGOCOPY_TEMPLATE_ROOT` and `DJANGOCOPY_IMAGE_ROOT` to define where uploaded template and image files are stored. For example:
+```
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.sites',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.contrib.sitemaps',
+
+    ...
+
+    'ckeditor',
+    'ckeditor_uploader',
+    'simple_history',
+    'djangocopy',
+
+    ...
+]
+
+...
+
+3. Setup `DJANGOCOPY_TEMPLATES` and `DJANGOCOPY_IMAGES` to define where uploaded template and image files are stored. 
+
+For example:
 
     ```
-    DJANGOCOPY_TEMPLATE_ROOT = 'templates'
-    DJANGOCOPY_IMAGE_ROOT = 'images'
+    DJANGOCOPY_TEMPLATES = 'djangocopy/templates/'
+    DJANGOCOPY_IMAGES = 'djangocopy/images/'
     ```
 
-    the above settings will upload templates to `MEDIA_ROOT/templates`
+These paths will sit below `MEDIA_ROOT`
 
-4. Add the  media folder to the `DIRS` list in `TEMPLATES` in order to serve uploaded templates. For example (if `DJANGOCOPY_TEMPLATE_ROOT` is set as above and `BASE_DIR` points to the project root folder):
+4. Add the  media folder to the `DIRS` list in `TEMPLATES` in order to serve uploaded templates. For example (if `DJANGOCOPY_TEMPLATES` is set as above:
 
     ```
     TEMPLATES = [
@@ -46,40 +75,22 @@ While it is extremely simple, it supports some features that I haven't found in 
 
 ### Dependencies:
 
-In _settings.py_ add:
+Django-copy depends on the following packages
 
 ```
-INSTALLED_APPS = [
-    'django.contrib.auth',
-    'django.contrib.sites',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'django.contrib.sitemaps',
+markdown
+django-jsonfield
+django-simple-history
+django-ckeditor
+django-ckeditor-filer
+```
 
-    ...
-
-    'ckeditor',
-    'ckeditor_uploader',
-
-    'simple_history',
-
-    'djangocopy',
-
-    ...
-]
-
-...
 
 # django.contrib.auth settings
 #
 
 LOGIN_URL = '/accounts/login'
-
 LOGIN_REDIRECT_URL = '/'
-
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
@@ -87,7 +98,6 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 #
 
 CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
-
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
