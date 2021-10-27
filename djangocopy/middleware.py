@@ -14,15 +14,23 @@ GEOIP_PATH = settings.GEOIP_PATH
 def get_ip_address(request):
     "Map request to external IP address resolving internal address if necessary"
 
-    forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
+    standardised_headers = {key.lower(): value for key, value in request.headers.items()}
 
-    if forwarded:
-        ip = forwarded.split(',')[0]
+    if "x-forwarded-for" in standardised_headers:
+        return standardised_headers.get("x-forwarded-for").split(',')[0]
+    elif "forwarded" in standardised_headers:
+        # Header format: "Forwarded": "for=<for_ip>, for=<proxy_ip>;host=<host>;proto=https"
+        # Extract the for=... component
+        forwarded_for = next(
+            component.lower() for component in request.headers.get("Forwarded").split(";")
+            if component.lower().startswith("for")
+        )
+        # Get the first IP address in the redirect chain (original client)
+        ip_address = forwarded_for.strip("for=").split(",")[0]
+
+        return ip_address
     else:
-        ip = request.META.get('REMOTE_ADDR')
-
-    return ip
-
+        return request.META.get('REMOTE_ADDR')
 
 
 def ip_to_country_code(addr, default_code='GB'):
