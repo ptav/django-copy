@@ -49,12 +49,12 @@ class PageAdmin(admin.ModelAdmin):
     model = Page
 
     ordering= ('slug', )
-    list_display = ('id', 'slug', 'template', )
+    list_display = ('slug', 'template', )
     search_fields = ('slug', )
 
     fieldsets = (
         (None, {
-            'fields': ('slug', 'template', )
+            'fields': ('slug', 'template', 'authenticated', 'groups')
         }),
         ('SEO', {
             #'classes': ('collapse', ),
@@ -104,7 +104,7 @@ class CopyAdmin(admin.ModelAdmin):
     actions = (publish_drafts, )
 
     ordering= ('url', 'fieldid', 'locale', 'geo', '-status')
-    list_display = ('url', 'fieldid', 'locale', 'geo', 'short_text', 'format', 'status')
+    list_display = ('fieldid', 'url', 'locale', 'geo', 'short_text', 'format', 'status')
     list_filter = ('status', 'locale', 'geo', 'url', 'fieldid')
     search_fields = ('text', 'locale', 'geo', 'fieldid', 'url')
 

@@ -12,7 +12,6 @@ from django.contrib.auth.models import Group
 from simple_history.models import HistoricalRecords
 
 
-
 class Template(models.Model):
     "HTML Templates"
 
@@ -39,6 +38,7 @@ class Page(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
     authenticated = models.BooleanField(default=False, help_text="If True, visitor must login to access this page")
+    groups = models.ManyToManyField(Group, blank=True, help_text="If populated, only members of these groups can view the page (authenticated flag is then ignored).")
 
     title = models.CharField(max_length=255,default='', blank=True)
     description = models.CharField(max_length=255,default='', blank=True)
@@ -88,9 +88,9 @@ class Copy(models.Model):
         (STATUS_PUBLISHED,'Published'),
     )
 
-    url = models.CharField(max_length=255,blank=True,help_text="URL name (leave empty to load for all templates)")
     fieldid = models.SlugField(max_length=100,help_text="The field identifier that will be used in templates")
 
+    url = models.CharField(max_length=255,blank=True,help_text="URL name (leave empty to load for all templates)")
     locale = models.CharField(max_length=5,blank=True,help_text="Browser settings (e.g. 'en_GB')")
     geo = models.CharField(max_length=2,blank=True,help_text="Country code derived from the IP (e.g. 'GB')")
 

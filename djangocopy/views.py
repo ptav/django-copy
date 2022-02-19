@@ -1,29 +1,44 @@
+import logging
+from pathlib import Path
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.decorators import decorator_from_middleware
+from django.conf import settings
 
-#from .middleware import LocalisationMiddleware
 from .models import Page
 
 
-#@decorator_from_middleware(LocalisationMiddleware)
+logger = logging.getLogger(__name__)
+
+
 def static_page(request,slug):
     try:
-        page = Page.objects.get(slug=slug)
-        if page.authenticated and not request.user.is_authenticated: raise Http404
+        page = Page.objects.filter(slug=slug) # slug has to be unique so qs will alsways be a single item
         
-        template = page.template.template.name
-        metadata = {
-            'title':        page.title,
-            'description':  page.description,
-            'keywords':     page.keywords,
+        # Check group permissions
+        if page[0].groups.count():
+            page = page.filter(groups__in=request.user.groups.all())
+            if not page:
+                raise Http404("Failed group permissions check")
+        
+        # Check for authentication
+        elif page[0].authenticated and not request.user.is_authenticated:
+            raise Http404("Failed authentication check")
+        
+    except Exception as err:
+        logger.error(f"Djangocopy error: {err}")
+        raise Http404(err)
+
+    context = {
+        'template': page[0].template.template.name,
+        'metadata': {
+            'title':        page[0].title,
+            'description':  page[0].description,
+            'keywords':     page[0].keywords,
         }
-
-    except:
-        raise Http404
-
-    return render(request, "djangocopy/wrapper.html", context={'template': template, 'metadata': metadata})
-
+    }
+        
+    return render(request, "djangocopy/wrapper.html", context)
 
 
 def index(request):
@@ -32,7 +47,6 @@ def index(request):
         return redirect('admin:index')
     else:
         return render(request, "djangocopy/default.html")
-
 
 
 class BasicView():

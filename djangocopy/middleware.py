@@ -6,9 +6,6 @@ from django.conf import settings
 from .models import Copy
 
 
-GEOIP_PATH = settings.GEOIP_PATH
-
-
 def get_ip_address(request):
     "Map request to external IP address resolving internal address if necessary"
 
@@ -34,10 +31,10 @@ def get_ip_address(request):
 def ip_to_country_code(addr, default_code='GB'):
     "Map request to client's country based on IP address"
 
-    if addr == '127.0.0.1' or addr == 'localhost':
+    if not hasattr(settings, 'GEOIP_PATH') or addr == '127.0.0.1' or addr == 'localhost':
         return default_code
 
-    g = GeoIP2(path=GEOIP_PATH)
+    g = GeoIP2(path = settings.GEOIP_PATH)
     return g.country(addr)['country_code']
 
 
