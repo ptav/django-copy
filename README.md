@@ -83,7 +83,7 @@ to configure these please add the following sample configuration in settings:
     #
 
     LOGIN_URL = '/accounts/login'
-    LOGIN_REDIRECT_URL = '/'
+    LOGIN_REDIRECT_URL = '/djangocopy/sample'
     LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
