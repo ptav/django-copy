@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-2y)_6lq33)f9t*ay+9v68syjkfe5jana)m!91ah0lujyhv8)mp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -165,7 +168,7 @@ TEMPLATES[0]['DIRS'] += [MEDIA_ROOT]
 #
 
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/djangocopy/sample'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
