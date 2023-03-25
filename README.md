@@ -1,6 +1,6 @@
 # django-copy
 
-Probably the smallest and simplest djangocopy for Django.
+Probably the smallest and simplest CMS for Django.
 
 While it is extremely simple, it supports some features that I haven't found in other CMS frameworks. Namely you can create 
 pages for multiple languages but also for multiple locations or any conbination of both.
