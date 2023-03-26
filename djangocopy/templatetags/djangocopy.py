@@ -1,4 +1,5 @@
 from uuid import uuid4
+from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.utils.translation import to_locale, get_language
 from django.template import Library, Node, TemplateSyntaxError
@@ -63,6 +64,7 @@ def list_to_4_column(objects):
         return [objects[:sz],objects[sz:2*sz],objects[2*sz:3*sz],objects[3*sz:]]
     else:
         return [objects]
+
 
 
 # Based on UUID Template Tag, https://djangosnippets.org/snippets/1356/

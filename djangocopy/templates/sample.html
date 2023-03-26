@@ -1,35 +1,38 @@
-<h1>Welcome to Django-copy</h1>
-    
-<h2>This is the sample template</h2>
+{% extends "djangocopy/base.html" %}
 
-<p>Register a new template in the admin panel <a href="/admin/djangocopy/template/">admin panel</a> 
-    and then a page in the respective <a href="/admin/djangocopy/page/">panel</a>
+{% block djangocopy-content %}
+    <h1>Welcome to Django-copy</h1>
+        
+    <h2>This is the sample template</h2>
 
-<p>Optionally, yuou can register a root URL in the settings folder of your website. For 
-    example you can add the following to the urlpatterns definition:</p>
+    <p>Register a new template in the admin panel <a href="/admin/djangocopy/template/">admin panel</a> 
+        and then a page in the respective <a href="/admin/djangocopy/page/">panel</a>
 
-<code>path('', RedirectView.as_view(url='sample', permanent=False)),</code>
+    <p>Optionally, yuou can register a root URL in the settings folder of your website. For 
+        example you can add the following to the urlpatterns definition:</p>
+
+    <code>path('', RedirectView.as_view(url='sample', permanent=False)),</code>
 
 
-<h2>User defined copy</h2>
+    <h2>User defined copy</h2>
 
-<p>Below we add some user defined content. To populate the content you need to add copy entries again 
-    using the admin. Go ahead and create a plaintext entry called `paragraph` and a JSON list called
-    `listitems`</p>
+    <p>Below we add some user defined content. To populate the content you need to add copy entries again 
+        using the admin. Go ahead and create a plaintext entry called `paragraph` and a JSON list called
+        `listitems`</p>
 
-{% if request.copy.paragraph %}
-    <p>{{ request.copy.paragraph }}</p>
-{% else %}
-    <p> No `paragraph` copy setup</p>
-{% endif %}
+    {% if request.copy.paragraph %}
+        <p>{{ request.copy.paragraph }}</p>
+    {% else %}
+        <p> No `paragraph` copy setup</p>
+    {% endif %}
 
-{% if request.copy.listitems %}
-    <ul>
-        {% for item in request.copy.listitems %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p> No `listitems` copy setup</p>
-{% endif %}
-
+    {% if request.copy.listitems %}
+        <ul>
+            {% for item in request.copy.listitems %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> No `listitems` copy setup</p>
+    {% endif %}
+{% endblock djangocopy-content %}

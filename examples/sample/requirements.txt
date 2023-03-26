@@ -1,5 +1,6 @@
 markdown
 geoip2
+django
 django-jsonfield
 django-simple-history
 django-ckeditor
