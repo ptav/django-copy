@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class PublicConfig(AppConfig):
+class DjangoCopyConfig(AppConfig):
     name = 'djangocopy'

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import sys
 from pathlib import Path
 
 
@@ -26,13 +27,15 @@ SECRET_KEY = 'django-insecure-2y)_6lq33)f9t*ay+9v68syjkfe5jana)m!91ah0lujyhv8)mp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-]
+#ALLOWED_HOSTS = [
+#    'localhost',
+#    '127.0.0.1',
+#]
 
 
 # Application definition
+
+sys.path.append(BASE_DIR / '..' / 'djangocopy')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,7 +52,7 @@ INSTALLED_APPS = [
     #'mptt',
     'bootstrapform',
     'simple_history',
-    'djangocopy',
+    'djangocopy.apps.DjangoCopyConfig',
 ]
 
 MIDDLEWARE = [
