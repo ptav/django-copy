@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     #'mptt',
     'bootstrapform',
     'simple_history',
+    
     'djangocopy.apps.DjangoCopyConfig',
 ]
 
