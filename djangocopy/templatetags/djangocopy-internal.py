@@ -28,6 +28,10 @@ def __djangocopy_load_libraries__():
         stream += '<!--- Load alpine.js -->'\
         '<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>'
     
+    if settings.DJANGOCOPY_ENABLE_JQUERY and not settings.DJANGOCOPY_ENABLE_BOOTSTRAP5:
+        stream += '<!--- Load jQuery -->'\
+        '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'
+    
     stream += '<!-- Load Font Awesome and DjangoCopy CSS -->'\
     '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">'
     '<link rel="stylesheet" href="{% static "css/djangocopy.css" %}">'

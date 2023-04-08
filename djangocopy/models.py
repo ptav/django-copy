@@ -1,6 +1,5 @@
 from markdown import markdown
 from json import loads
-from jsonfield import JSONField
 
 from django.db import models
 from django.db.models import Q
@@ -57,7 +56,7 @@ class Navbar(models.Model):
     label = models.CharField(max_length=255)
     logo = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True, help_text="A picture to use as a logo")
     groups = models.ManyToManyField(Group, blank=True, help_text="Associate navbar with a particular user group.")
-    elements = JSONField()
+    elements = models.JSONField()
     z_index = models.IntegerField(default=0, help_text="The z-index determines the order of navbar items. A higher value appears first.")
 
     history = HistoricalRecords()
