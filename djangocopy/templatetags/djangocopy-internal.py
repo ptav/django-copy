@@ -28,7 +28,7 @@ def __djangocopy_load_libraries__():
         stream += '<!--- Load alpine.js -->'\
         '<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>'
     
-    if settings.DJANGOCOPY_ENABLE_JQUERY and not settings.DJANGOCOPY_ENABLE_BOOTSTRAP5:
+    if settings.DJANGOCOPY_ENABLE_JQUERY:
         stream += '<!--- Load jQuery -->'\
         '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'
     
