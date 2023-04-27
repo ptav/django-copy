@@ -1,47 +1,54 @@
 {% load djangocopy static %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">
-    {% if navbar_logo %}<img src="{{ navbar_logo }}" height="60">{% endif %}
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      {% for entry in navbar_items %}
-      {% if entry.dropdown %}
-      <li class="nav-item dropdown {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
-        <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-{{ entry.label|slugify }}" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          {% if entry.faicon %}{% faicon entry.faicon %}{% endif %}
-          {% if entry.label %}{{ entry.label }}{% endif %}
-          {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ entry.label|slugify }}">
-          {% for dentry in entry.dropdown %}
-          <a class="dropdown-item" href="{{ dentry.url }}">
-            {% if dentry.label %}{{ dentry.label }}{% endif %}
-            {% if dentry.img %}<img class="rounded" src="{{ dentry.img }}" height="35">{% endif %}
-            {% if dentry.faicon %}{% faicon dentry.faicon %}{% endif %}
-          </a>
-          {% if dentry.divider %}<div class="dropdown-divider"></div>{% endif %}
-          {% endfor %}
-        </div>
-      </li>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      {% if navbar_logo %}
+      <img src="{{ navbar_logo }}" height="60">
       {% else %}
-      <li class="nav-item {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
-        <a class="nav-link" href="{{ entry.url }}" {% if entry.label %}title="{{ entry.label }}"{% endif %}>
-          {% if entry.faicon %}{% faicon entry.faicon %}{% endif %}
-          {% if entry.label %}{{ entry.label }}{% endif %}
-          {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
-        </a>
-      </li>
+      <button class="btn btn-outline-secondary" type="submit">Home</button>
       {% endif %}
-      {% endfor %}
-    </ul>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="d-flex justify-content-end">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          {% for entry in navbar_items %}
+          {% if entry.dropdown %}
+          <li class="nav-item dropdown {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-{{ entry.label|slugify }}" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {% if entry.faicon %}{% faicon entry.faicon %}{% endif %}
+              {% if entry.label %}{{ entry.label }}{% endif %}
+              {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ entry.label|slugify }}">
+              {% for dentry in entry.dropdown %}
+              <a class="dropdown-item" href="{{ dentry.url }}">
+                {% if dentry.label %}{{ dentry.label }}{% endif %}
+                {% if dentry.img %}<img class="rounded" src="{{ dentry.img }}" height="35">{% endif %}
+                {% if dentry.faicon %}{% faicon dentry.faicon %}{% endif %}
+              </a>
+              {% if dentry.divider %}<div class="dropdown-divider"></div>{% endif %}
+              {% endfor %}
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item {% if entry.class %}{{ entry.class }}{% else %}active{% endif %}">
+            <a class="nav-link" href="{{ entry.url }}" {% if entry.label %}title="{{ entry.label }}" {% endif %}>
+              {% if entry.faicon %}{% faicon entry.faicon %}{% endif %}
+              {% if entry.label %}{{ entry.label }}{% endif %}
+              {% if entry.img %}<img class="rounded" src="{{ entry.img }}" height="35">{% endif %}
+            </a>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
-<br>

@@ -34,8 +34,8 @@ DEBUG = True
 
 
 # Application definition
-
-sys.path.append(BASE_DIR / '..' / 'djangocopy')
+APP_DIR = BASE_DIR / '..'
+sys.path.append(str(APP_DIR.resolve()))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'filer',
     #'mptt',
-    'bootstrapform',
     'simple_history',
     
     'djangocopy.apps.DjangoCopyConfig',
