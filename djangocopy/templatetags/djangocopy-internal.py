@@ -54,13 +54,18 @@ def __djangocopy_navbar__(context):
     """
 
     if hasattr(context, 'request') and hasattr(context.request, 'user'):
-        # First check if there are Navbar associated with this user's group, then look for a default one
-        qs = Navbar.objects.filter(groups__in=context.request.user.groups.all()).order_by('-z_index').distinct()
-        if not qs.exists():
-            qs = Navbar.objects.filter(groups=None) # return default navbar
-        if not qs.exists():
-            return {} # still nothing? return empty
+        user = context.request.user
 
+        if user.is_anonymous:
+            qs = Navbar.objects.filter(anonymous=True).order_by('-z_index').distinct()
+
+        else:
+            # First check if there are Navbar associated with this user's group, then look for a default one
+            qs = Navbar.objects.filter(anonymous=False, groups__in=context.request.user.groups.all()).order_by('-z_index').distinct()
+            if not qs.exists():
+                qs = Navbar.objects.filter(anonymous=False, groups=None).order_by('-z_index').distinct()
+            if not qs.exists():
+                return {} # still nothing? return empty
     else:
         return {}
 

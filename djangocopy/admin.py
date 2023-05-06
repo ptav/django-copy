@@ -29,7 +29,7 @@ Dropdown (and example of divider):
 class NavbarAdmin(admin.ModelAdmin):
     model = Navbar
 
-    list_display = ('label', 'get_groups', )
+    list_display = ('label', 'get_groups', 'anonymous', 'z_index', )
     autocomplete_fields = ('groups', )
 
     help_texts = {

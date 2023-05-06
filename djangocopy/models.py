@@ -58,6 +58,7 @@ class Navbar(models.Model):
     groups = models.ManyToManyField(Group, blank=True, help_text="Associate navbar with a particular user group.")
     elements = models.JSONField()
     z_index = models.IntegerField(default=0, help_text="The z-index determines the order of navbar items. A higher value appears first.")
+    anonymous = models.BooleanField(default=False, help_text="If True, navbar is shown to anonymous users. If False (default), navbar is shown to authenticated users only.")
 
     history = HistoricalRecords()
 

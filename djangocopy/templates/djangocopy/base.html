@@ -8,8 +8,7 @@
         {% include "djangocopy/metadata.html" %}
         {% include "djangocopy/libraries.html" %}
         {% include "djangocopy/favicons.html" %}
-
-        {% block djangocopy-head %}{% endblock %}
+        {% block head %}{% endblock %}
     </head>
 
     <body
@@ -22,10 +21,10 @@
         
         <div class="{% block djangocopy-container %}container{% endblock %}">
             {% include "djangocopy/messages.html" %}
-            {% block djangocopy-content %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
         
-        {% block djangocopy-footer %}{% endblock %}
-        {% block djangocopy-script %}{% endblock %}
+        {% block footer %}{% endblock %}
+        {% block script %}{% endblock %}
     </body>
 </html>
