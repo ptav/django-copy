@@ -1,9 +1,9 @@
 markdown
 geoip2
 django
-django-jsonfield
+jsonfield
+#django-jsonfield
 django-simple-history
 django-ckeditor
 django-ckeditor-filer
 django-bootstrap-form
-jsonfield-3.1.0
