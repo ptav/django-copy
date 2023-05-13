@@ -12,6 +12,7 @@ def __djangocopy_load_libraries__():
     explicit = settings._explicit_settings
 
     stream = ""
+    
     if 'DJANGOCOPY_ENABLE_BOOTSTRAP5' in explicit and settings.DJANGOCOPY_ENABLE_BOOTSTRAP5:
         stream += '<!--- Load Bootstrap v5 CSS -->'\
         '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'\
@@ -40,7 +41,7 @@ def __djangocopy_load_libraries__():
         '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">'
 
     stream += '<!-- Load DjangoCopy CSS -->'\
-    '<link rel="stylesheet" href="{% static "css/djangocopy.css" %}">'
+    '<link rel="stylesheet" href="/static/css/djangocopy.css">'
 
     return mark_safe(stream)
 
