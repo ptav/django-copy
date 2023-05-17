@@ -1,2 +1,6 @@
-{% load djangocopy-internal %}
+{% load static djangocopy-internal %}
+
 {% __djangocopy_load_libraries__ %}
+
+<!-- Load DjangoCopy CSS -->
+<link rel="stylesheet" href="{% static 'css/djangocopy.css' %}">
