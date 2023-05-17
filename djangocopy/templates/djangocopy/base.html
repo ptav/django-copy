@@ -18,9 +18,9 @@
         {% if csrf_token %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'{% endif %}>
 
         {% __djangocopy_navbar__ %}
-        
+        {% include "djangocopy/messages.html" %}
+
         <div class="{% block djangocopy-container %}container{% endblock %}">
-            {% include "djangocopy/messages.html" %}
             {% block content %}{% endblock %}
         </div>
         
