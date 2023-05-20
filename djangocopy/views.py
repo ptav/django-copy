@@ -2,7 +2,6 @@ import logging
 from pathlib import Path
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.utils.decorators import decorator_from_middleware
 from django.conf import settings
 
 from .models import Page
@@ -51,29 +50,8 @@ def index(request):
 
 class BasicView():
     FORM_CLASS = None
-
-    def get(self, request, *args, **kwargs):
-        form = self.FORM_CLASS(request.GET)
-        if form.is_valid():
-            return self.form_is_valid(form)
-        else:
-            return self.form_is_not_valid(form)
-
-    def post(self, request, *args, **kwargs):
-        form = self.FORM_CLASS(request.POST)
-        if form.is_valid():
-            return self.form_is_valid(form)
-        else:
-            return self.form_is_not_valid(form)
-
-    def unbound(self, request, *args, **kwargs):
-        pass
-
-    def form_is_valid(self, form):
-        pass
-
-    def form_is_not_valid(self, form):
-        pass
+    FORM_TEMPLATE = None
+    FORM_TEMPLATE_VAR = 'form'
 
     def __call__(self, request, *args, **kwargs):
         if request.GET:
@@ -84,3 +62,35 @@ class BasicView():
 
         else:
             return self.unbound(request, *args, **kwargs)
+            
+    def get(self, request, *args, **kwargs):
+        form = self.FORM_CLASS(request.GET)
+        if form.is_valid():
+            return self.get_is_valid(request, form, *args, **kwargs)
+        else:
+            return self.get_not_valid(request, form, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        form = self.FORM_CLASS(request.POST)
+        if form.is_valid():
+            return self.post_is_valid(request, form, *args, **kwargs)
+        else:
+            return self.post_not_valid(request, form, *args, **kwargs)
+
+    def unbound(self, request, *args, **kwargs):
+        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS()}
+        return render(request, self.FORM_TEMPLATE, context)
+
+    def get_is_valid(self, request, form, *args, **kwargs):
+        pass
+
+    def get_not_valid(self, request, form, *args, **kwargs):
+        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS(form)}
+        return render(request, self.FORM_TEMPLATE, context)
+
+    def post_is_valid(self, request, form, *args, **kwargs):
+        pass
+
+    def post_not_valid(self, request, form, *args, **kwargs):
+        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS(form)}
+        return render(request, self.FORM_TEMPLATE, context)

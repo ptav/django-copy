@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'easy_thumbnails',
     'filer',
-    #'mptt',
+    'mptt',
     'simple_history',
     
     'djangocopy.apps.DjangoCopyConfig',
@@ -65,7 +65,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
     # Automatically inject djangocopy content into a template context
-    'djangocopy.middleware.LocalisationMiddleware',
+    'djangocopy.middleware.CopyMiddleware',
+
+    # Enable page visit tracking
+    'djangocopy.middleware.TrackMiddleware',
 ]
 
 ROOT_URLCONF = 'sample.urls'

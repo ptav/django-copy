@@ -1,7 +1,0 @@
-markdown
-geoip2
-
-django
-django-simple-history
-django-ckeditor
-django-ckeditor-filer

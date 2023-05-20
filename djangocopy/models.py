@@ -6,8 +6,9 @@ from django.db.models import Q
 from django.urls import resolve
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-
+from django.contrib.sessions.models import Session
 from simple_history.models import HistoricalRecords
 
 
@@ -100,6 +101,7 @@ class Copy(models.Model):
 
     history = HistoricalRecords()
 
+
     class Meta:
         verbose_name_plural = 'copy'
         unique_together = (("fieldid","url","locale","geo","status"),)
@@ -144,14 +146,6 @@ class Copy(models.Model):
 
 
 
-def __map_json__(txt):
-    try:
-        return loads(txt)
-    except Exception as e:
-        logging.error('Error decoding JSON copy: {} ({})'.format(txt,e))
-        pass # log error and fail silently
-
-
 __MAPPING__ = {
     Copy.FORMAT_PLAIN: lambda txt: txt,
     Copy.FORMAT_MARKDOWN: lambda txt: mark_safe(markdown(txt)),
@@ -160,3 +154,28 @@ __MAPPING__ = {
     Copy.FORMAT_SPECIAL_HTML: lambda txt: mark_safe(txt),
 }
 
+def __map_json__(txt):
+    try:
+        return loads(txt)
+
+    except Exception as e:
+        # log error and fail silently
+        logging.error('Error decoding JSON copy: {} ({})'.format(txt,e))
+
+
+class PageVisit(models.Model):
+    "Log of page visits. Works together with PageVisitMiddleware in middleware.py"
+
+    time = models.DateTimeField(auto_now_add=True)
+    url = models.URLField()
+    status_code = models.IntegerField()
+    ip = models.GenericIPAddressField()
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+    referrer = models.URLField()
+    user_agent = models.TextField()
+    session = models.CharField(max_length=40, null=True)
+    device_info = models.TextField()
+    language = models.CharField(max_length=5)
+
+    def __str__(self):
+        return f'{self.time} {self.user} {self.status_code} {self.url}'

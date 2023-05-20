@@ -1,9 +1,10 @@
+user_agents
 markdown
 geoip2
+html2text
 django
-jsonfield
-#django-jsonfield
 django-simple-history
 django-ckeditor
 django-ckeditor-filer
-django-bootstrap-form
+django-filer
+django-bootstrap5

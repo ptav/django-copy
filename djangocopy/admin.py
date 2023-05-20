@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Template, Image, Page, Copy, Navbar
+from .models import Template, Image, Page, Copy, Navbar, PageVisit
 
 
 
@@ -107,6 +107,21 @@ class CopyAdmin(admin.ModelAdmin):
     list_display = ('fieldid', 'url', 'locale', 'geo', 'short_text', 'format', 'status')
     list_filter = ('status', 'locale', 'geo', 'url', 'fieldid')
     search_fields = ('text', 'locale', 'geo', 'fieldid', 'url')
+
+
+@admin.register(PageVisit)
+class PageVisitAdmin(admin.ModelAdmin):
+    def get_readonly_fields(self, request, obj=None):
+        return [f.name for f in self.model._meta.get_fields()]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 admin.site.register(Template)

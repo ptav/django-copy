@@ -11,7 +11,9 @@ pages for multiple languages but also for multiple locations or any conbination 
 
 ## Installation
 
-1. Use pip to instal the latest stable release
+1. Installation
+
+    Use pip to instal the latest stable release
 
     ```
     pip install django-copy
@@ -20,19 +22,28 @@ pages for multiple languages but also for multiple locations or any conbination 
     You can also install a local copy by running `setup.py install` at the top directory of django-copy
 
 
-2. Add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
+2. `INSTALLED_APPS`
+
+    Add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
 
     ```
     'ckeditor',
     'ckeditor_uploader',
-    'filer'
     'easy_thumbnails',
+    'filer',
+    'mptt',
     'simple_history',
     'djangocopy',
     ```
 
-5. Add `djangocopy.middleware.LocalisationMiddleware` to `MIDDLEWARE` in the project settings file 
-(OR see alternative further below)
+5. Middleware
+
+    to enable automatically adding required copy to a view, add `djangocopy.middleware.CopyMiddleware` 
+    to `MIDDLEWARE` in the project settings file
+
+    To enable automated page visit tracking att `djangocopy.middleware.TrackMiddleware` to `MIDDLEWARE` 
+
+
 
 
 ## Configuration
@@ -99,7 +110,7 @@ to configure these please add the following sample configuration in settings:
     ```
 
 
-## Optional
+## Usage
 
 #### Alternative page wrappers
 
@@ -107,17 +118,18 @@ By default `djangocopy/wrapper.html` is used to wrap user content and provide ba
 the usual Django way.
 
 
-#### Localisation Middleware
+#### Middleware
 
-If you follow the steps above, all views in the project will get access to the content stored in the djangocopy app. That carries 
-a small overhead so if you want to avoid that you can instead add `@decorator_from_middleware(LocalisationMiddleware)` to each of 
-the views that will require access to DB stored content. For example:
+If you follow the steps above, all views in the project will get access to the copy stored in the djangocopy app and all page visits will be tracked (including admin access).
+
+That carries a small overhead so if you want to avoid that you can instead use the corresponding decorators to each of the views that will require access to the copy content (`@copy_decorator`) and/or
+tracking (`@track_decorator`). For example:
 
     ```
     from django.utils.decorators import decorator_from_middleware
-    from djangocopy.middleware import LocalisationMiddleware
+    from djangocopy.middleware import CopyMiddleware
 
-    @decorator_from_middleware(LocalisationMiddleware)
+    @copy_decorator
     def my_view
         ...
     ```
