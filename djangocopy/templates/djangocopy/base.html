@@ -24,7 +24,12 @@
             {% block content %}{% endblock %}
         </div>
         
-        {% block footer %}{% endblock %}
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                {% include "djangocopy/footer.html" %}
+            </div>
+        </footer>
+
         {% block script %}{% endblock %}
     </body>
 </html>
