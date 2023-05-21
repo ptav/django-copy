@@ -15,7 +15,7 @@ from simple_history.models import HistoricalRecords
 
 class Template(models.Model):
     "HTML Templates"
-    template = models.FileField(upload_to=settings.DJANGOCOPY_TEMPLATES)
+    template = models.FileField(upload_to=settings.MEDIA_ROOT)
     label = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
