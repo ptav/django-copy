@@ -55,16 +55,30 @@ pages for multiple languages but also for multiple locations or any conbination 
     MEDIA_URL = '/media/'
     ```
 
-2. Also in settings, create `DJANGOCOPY_TEMPLATES` and `DJANGOCOPY_IMAGES` to define where uploaded template and imagefiles are stored. These paths will sit below `MEDIA_ROOT`. Setting `DJANGOCOPY_SITE_TITLE` is also advisable. For example:
+2. Also in settings, create `DJANGOCOPY_TEMPLATES` and `DJANGOCOPY_IMAGES` to define where uploaded template and imagefiles are stored. These paths will sit below `MEDIA_ROOT`. For example:
 
     ```
     DJANGOCOPY_TEMPLATES = 'copy/templates/'
     DJANGOCOPY_IMAGES = 'copy/images/'
+    ```
+
+3. Flag which 3rd party libraries you want to import into the site by setting eachof the following flags to True:
+
+    ```
+    DJANGOCOPY_ENABLE_BOOTSTRAP4 = True
+    DJANGOCOPY_ENABLE_BOOTSTRAP5 = True
+    DJANGOCOPY_ENABLE_HTMX = True
+    DJANGOCOPY_ENABLE_FONTAWESOME = True
+    DJANGOCOPY_ENABLE_ALPINEJS = True
+    ```
+
+4. Setting `DJANGOCOPY_SITE_TITLE` is also advisable. It will be used as alt text for the logo if that is set, or to fill the home button in the navbar.
+
+    ```
     DJANGOCOPY_SITE_TITLE = 'MySite'
     ```
 
-
-7. In _urls.py_ add
+5. In _urls.py_ add
 
     ```
     path('ckeditor/', include('ckeditor_uploader.urls')),
