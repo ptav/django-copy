@@ -2,13 +2,10 @@
     
 <h2>This is the sample template</h2>
 
-<p>Register a new template in the admin panel <a href="/admin/djangocopy/template/">admin panel</a> 
-    and then a page in the respective <a href="/admin/djangocopy/page/">panel</a>
-
-<p>Optionally, yuou can register a root URL in the settings folder of your website. For 
-    example you can add the following to the urlpatterns definition:</p>
-
-<code>path('', RedirectView.as_view(url='sample', permanent=False)),</code>
+<p>This is a sample page. The template is stored you project under `templates/djangocopy`
+    and is loaded automatically when the website initialises<p>
+        
+<p>You can find all the templates in the admin on the <a href="/admin/djangocopy/template/">panel</a></p>
 
 
 <h2>User defined copy</h2>
@@ -20,7 +17,7 @@
 {% if request.copy.paragraph %}
     <p>{{ request.copy.paragraph }}</p>
 {% else %}
-    <p> No `paragraph` copy setup</p>
+    <p> No `paragraph` copy setup. Set it using this <a href="/admin/djangocopy/copy/">link</a></p>
 {% endif %}
 
 {% if request.copy.listitems %}
@@ -30,6 +27,5 @@
         {% endfor %}
     </ul>
 {% else %}
-    <p> No `listitems` copy setup</p>
+    <p> No `listitems` copy setup. Set it using this <a href="/admin/djangocopy/copy/">link</a></p>
 {% endif %}
-

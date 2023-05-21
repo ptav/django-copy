@@ -12,13 +12,13 @@ class CopyMiddleware:
         self.get_response = get_response
 
     def __call__(self, request, *args, **kwargs):
-        # Load applicable copy into the request before running the function
-        url = request.path
-        locale = to_locale(get_language())
-        geo = get_client_country_code(request)
-        draft = request.user.is_authenticated and 'draft' in request.GET
+        if not hasattr(request, 'copy'): # If copy is already loaded, don't reload it"
+            url = request.path
+            locale = to_locale(get_language())
+            geo = get_client_country_code(request)
+            draft = request.user.is_authenticated and 'draft' in request.GET
 
-        request.copy = Copy.get_for_url(url, locale, geo, draft)
+            request.copy = Copy.get_for_url(url, locale, geo, draft)
 
         return self.get_response(request, *args, **kwargs)
 

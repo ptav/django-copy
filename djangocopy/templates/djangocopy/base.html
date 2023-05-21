@@ -1,35 +1,36 @@
 {% load i18n static djangocopy-internal %}
 <!DOCTYPE html>
 <html lang="{% if LANGUAGE_CODE %}{{ LANGUAGE_CODE }}{% else %}en{% endif %}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% include "djangocopy/metadata.html" %}
-        {% include "djangocopy/libraries.html" %}
-        {% include "djangocopy/favicons.html" %}
-        {% block head %}{% endblock %}
-    </head>
 
-    <body
-        id="{% block pageid %}{% endblock %}"
-        class="{% block body-class %}{% endblock %}"
-        {% if onload %}onload={{ onload }}{% endif %}
-        {% if csrf_token %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "djangocopy/metadata.html" %}
+    {% include "djangocopy/libraries.html" %}
+    {% include "djangocopy/favicons.html" %}
+    {% block head %}{% endblock %}
+</head>
 
-        {% __djangocopy_navbar__ %}
-        {% include "djangocopy/messages.html" %}
+<body id="{% block pageid %}{% endblock %}" class="{% block body-class %}{% endblock %}"
+    {% if onload %}onload={{ onload }}{% endif %} {% if csrf_token %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    {% endif %}>
 
-        <div class="{% block djangocopy-container %}container{% endblock %}">
-            {% block content %}{% endblock %}
-        </div>
-        
-        <footer class="footer mt-auto py-3 bg-light">
-            <div class="container">
-                {% include "djangocopy/footer.html" %}
+    <div class="d-flex flex-column min-vh-100">
+        <div class="flex-fill">
+            <!-- Your main content goes here -->
+            {% __djangocopy_navbar__ %}
+            {% include "djangocopy/messages.html" %}
+
+            <div class="{% block djangocopy-container %}container{% endblock %}">
+                {% block content %}{% endblock %}
             </div>
-        </footer>
 
-        {% block script %}{% endblock %}
-    </body>
+        </div>
+        {% include "djangocopy/footer.html" %}
+    </div>
+
+    {% block script %}{% endblock %}
+</body>
+
 </html>

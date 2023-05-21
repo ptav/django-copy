@@ -20,7 +20,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('filer/', include('filer.urls')),
-    path('djangocopy/', include('djangocopy.urls')),
+    path('copy/', include('djangocopy.urls')),
 
     path('admin/', admin.site.urls),
 ]

@@ -1,2 +1,2 @@
-# (c) 2018 Pedro A. C. Tavares
+# (c) 2023 Pedro A. C. Tavares
 # All rights reserved

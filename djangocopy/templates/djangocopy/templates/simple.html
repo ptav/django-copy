@@ -1,0 +1,12 @@
+{% if request.copy.title %}<h1>{{ request.copy.title }}</h1>{% endif %}
+
+{% if request.copy.subtitle %}<h3>{{ request.copy.subtitle }}</h3>{% endif %}
+
+{% if request.copy.content %}
+<div>
+    {{ request.copy.content }}
+</div>
+{% else %}
+<p>There is no copy for this page. Did you forget to create  a 'title',
+    'subtitle' or 'content' linked to the URL {{ request.path }}?</p>
+{% endif %}

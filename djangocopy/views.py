@@ -1,6 +1,6 @@
 import logging
-from pathlib import Path
-from django.http import Http404
+from django.http import HttpResponseServerError
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.conf import settings
 
@@ -12,28 +12,29 @@ logger = logging.getLogger(__name__)
 
 def static_page(request,slug):
     try:
-        page = Page.objects.filter(slug=slug) # slug has to be unique so qs will alsways be a single item
+        page = Page.objects.filter(slug=slug).first()
+        # slug has to be unique so qs will alsways be a single item
         
         # Check group permissions
-        if page[0].groups.count():
+        if page.groups.count():
             page = page.filter(groups__in=request.user.groups.all())
             if not page:
-                raise Http404("Failed group permissions check")
+                raise PermissionDenied("Need additional permissions to view this page")
         
         # Check for authentication
-        elif page[0].authenticated and not request.user.is_authenticated:
-            raise Http404("Failed authentication check")
+        elif page.authenticated and not request.user.is_authenticated:
+            raise PermissionDenied("Need to be signedin to view this page")
         
     except Exception as err:
         logger.error(f"Djangocopy error: {err}")
-        raise Http404(err)
+        return HttpResponseServerError(err)
 
     context = {
-        'template': page[0].template.template.name,
+        'template': 'djangocopy/templates/' + page.template.template.name,
         'metadata': {
-            'title':        page[0].title,
-            'description':  page[0].description,
-            'keywords':     page[0].keywords,
+            'title':        page.title,
+            'description':  page.description,
+            'keywords':     page.keywords,
         }
     }
         
