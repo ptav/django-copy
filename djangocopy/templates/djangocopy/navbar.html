@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       {% if navbar_logo %}
-      <img src="{{ navbar_logo }}" height="60">
+      <img src="{{ navbar_logo }}" height="60" alt="{{ navbar_title }}">
       {% else %}
-      <button class="btn btn-outline-secondary" type="submit">Home</button>
+      <button class="btn btn-outline-secondary" type="submit">{{ navbar_title }}</button>
       {% endif %}
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

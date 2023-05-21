@@ -115,8 +115,11 @@ def __djangocopy_navbar__(context):
     #    print(e)
     #    e['url'] = reverse(e['url'], args=e.get('args',None))
 
+    title = settings.DJANGOCOPY_SITE_TITLE if hasattr(settings, 'DJANGOCOPY_SITE_TITLE') else 'Home'
+
     return {
         'navbar_logo': logo, # if there are several navbars use only the first logo
+        'navbar_title': title,
         'navbar_items': elements,
     }
 

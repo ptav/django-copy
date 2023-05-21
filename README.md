@@ -55,14 +55,12 @@ pages for multiple languages but also for multiple locations or any conbination 
     MEDIA_URL = '/media/'
     ```
 
-2. Also in settings, create `DJANGOCOPY_TEMPLATES` and `DJANGOCOPY_IMAGES` to define where uploaded template and imagefiles are 
-stored. These paths will sit below `MEDIA_ROOT` so add the media folder to the `DIRS` list in `TEMPLATES` to make it searchable 
-by the Django template framework. For example:
+2. Also in settings, create `DJANGOCOPY_TEMPLATES` and `DJANGOCOPY_IMAGES` to define where uploaded template and imagefiles are stored. These paths will sit below `MEDIA_ROOT`. Setting `DJANGOCOPY_SITE_TITLE` is also advisable. For example:
 
     ```
     DJANGOCOPY_TEMPLATES = 'copy/templates/'
     DJANGOCOPY_IMAGES = 'copy/images/'
-    TEMPLATES[0]['DIRS'] += [MEDIA_ROOT]
+    DJANGOCOPY_SITE_TITLE = 'MySite'
     ```
 
 
@@ -72,7 +70,7 @@ by the Django template framework. For example:
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('filer/', include('filer.urls')),
-    path('djangocopy/', include('djangocopy.urls')),
+    path('copy/', include('djangocopy.urls')),
     ```
 
 

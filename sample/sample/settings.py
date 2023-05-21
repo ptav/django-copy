@@ -158,10 +158,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://github.com/ptav/django-copy
 
 # Django Copy templates will be stored under media/templates
-DJANGOCOPY_TEMPLATES = 'djangocopy/templates/'
-DJANGOCOPY_IMAGES = 'djangocopy/images/'
-TEMPLATES[0]['DIRS'] += [MEDIA_ROOT]
-
+DJANGOCOPY_TEMPLATES = 'copy/templates/'
+DJANGOCOPY_IMAGES = 'copy/images/'
+DJANGOCOPY_SITE_TITLE = 'Djangocopy Sample'
 
 
 # GeoIP2
