@@ -55,18 +55,17 @@ pages for multiple languages but also for multiple locations or any conbination 
     MEDIA_URL = '/media/'
     ```
 
-2. Also in settings, create `DJANGOCOPY_TEMPLATES` and `DJANGOCOPY_IMAGES` to define where uploaded template and imagefiles are stored. These paths will sit below `MEDIA_ROOT`. For example:
+2. Also in settings, add `DJANGOCOPY_IMAGES` to define where uploaded template and imagefiles are stored. These paths will sit below `MEDIA_ROOT`. For example:
 
     ```
-    DJANGOCOPY_TEMPLATES = 'copy/templates/'
     DJANGOCOPY_IMAGES = 'copy/images/'
     ```
 
-3. Flag which 3rd party libraries you want to import into the site by setting eachof the following flags to True:
+3. Flag which 3rd party libraries you want to import into the site by setting eachof the following flags to True. If not define these are assumed to be False:
 
     ```
     DJANGOCOPY_ENABLE_BOOTSTRAP4 = True
-    DJANGOCOPY_ENABLE_BOOTSTRAP5 = True
+    DJANGOCOPY_ENABLE_BOOTSTRAP5 = False
     DJANGOCOPY_ENABLE_HTMX = True
     DJANGOCOPY_ENABLE_FONTAWESOME = True
     DJANGOCOPY_ENABLE_ALPINEJS = True
