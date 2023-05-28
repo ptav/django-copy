@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from message.views import test_message_1, test_message_2
 
 urlpatterns = [
+    path('test-message-1', test_message_1, name='test-messages-1'),
+    path('test-message-2', test_message_2, name='test-messages-2'),
+    
     path('accounts/', include('django.contrib.auth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('filer/', include('filer.urls')),

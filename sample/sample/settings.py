@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'simple_history',
     
     'djangocopy.apps.DjangoCopyConfig',
+    'message.apps.MessageConfig',
 ]
 
 MIDDLEWARE = [
@@ -161,6 +162,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DJANGOCOPY_TEMPLATES = 'copy/templates/'
 DJANGOCOPY_IMAGES = 'copy/images/'
 DJANGOCOPY_SITE_TITLE = 'Djangocopy Sample'
+
+DJANGOCOPY_ENABLE_BOOTSTRAP5 = True
+DJANGOCOPY_ENABLE_HTMX = True
+DJANGOCOPY_ENABLE_ALPINE = True
+DJANGOCOPY_USE_CDN = True
 
 
 # GeoIP2
