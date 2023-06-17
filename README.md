@@ -11,20 +11,13 @@ pages for multiple languages but also for multiple locations or any conbination 
 
 ## Installation
 
-1. Installation
+Use pip to instal the latest stable release.
 
-    Use pip to instal the latest stable release
+```
+pip install django-copy
+```
 
-    ```
-    pip install django-copy
-    ```
-
-    You can also install a local copy by running `setup.py install` at the top directory of django-copy
-
-
-2. `INSTALLED_APPS`
-
-    Add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
+Then add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
 
     ```
     'ckeditor',
@@ -35,15 +28,6 @@ pages for multiple languages but also for multiple locations or any conbination 
     'simple_history',
     'djangocopy',
     ```
-
-5. Middleware
-
-    to enable automatically adding required copy to a view, add `djangocopy.middleware.CopyMiddleware` 
-    to `MIDDLEWARE` in the project settings file
-
-    To enable automated page visit tracking att `djangocopy.middleware.TrackMiddleware` to `MIDDLEWARE` 
-
-
 
 
 ## Configuration
@@ -61,7 +45,25 @@ pages for multiple languages but also for multiple locations or any conbination 
     DJANGOCOPY_IMAGES = 'copy/images/'
     ```
 
-3. Flag which 3rd party libraries you want to import into the site by setting eachof the following flags to True. If not define these are assumed to be False:
+3. Middleware
+
+    to automatically add required copy to a view, add `djangocopy.middleware.CopyMiddleware` to `MIDDLEWARE` in the project settings file
+
+    To enable the cookie consent form add `djangocopy.middleware.CookieConsentMiddleware`
+
+    To enable automated page visit tracking ad `djangocopy.middleware.TrackMiddleware`
+
+
+4. In _urls.py_ add
+
+    ```
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('filer/', include('filer.urls')),
+    path('copy/', include('djangocopy.urls')),
+    ```
+
+5. Flag which 3rd party libraries you want to import into the site by setting each of the following flags to True. If not define these are assumed to be False:
 
     ```
     DJANGOCOPY_ENABLE_BOOTSTRAP4 = True
@@ -71,20 +73,20 @@ pages for multiple languages but also for multiple locations or any conbination 
     DJANGOCOPY_ENABLE_ALPINEJS = True
     ```
 
-4. Setting `DJANGOCOPY_SITE_TITLE` is also advisable. It will be used as alt text for the logo if that is set, or to fill the home button in the navbar.
+6. If using Bootstrap, align the django ERROR message with the Bootstrap DANGER message
+
+```
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+```
+
+7. Setting `DJANGOCOPY_SITE_TITLE` is also advisable. It will be used as alt text for the logo if that is set, or to fill the home button in the navbar.
 
     ```
     DJANGOCOPY_SITE_TITLE = 'MySite'
     ```
 
-5. In _urls.py_ add
-
-    ```
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('filer/', include('filer.urls')),
-    path('copy/', include('djangocopy.urls')),
-    ```
 
 
 ### Dependencies:
@@ -121,15 +123,13 @@ to configure these please add the following sample configuration in settings:
     ```
 
 
-## Usage
-
-#### Alternative page wrappers
+### Alternative page wrappers
 
 By default `djangocopy/wrapper.html` is used to wrap user content and provide basic settings. You can override this template in
 the usual Django way.
 
 
-#### Middleware
+### Loading copy without middleware
 
 If you follow the steps above, all views in the project will get access to the copy stored in the djangocopy app and all page visits will be tracked (including admin access).
 
@@ -146,7 +146,7 @@ tracking (`@track_decorator`). For example:
     ```
 
 
-#### IP Localisation
+### IP Localisation
 
 djangocopy can localise the IP address requesting a page and adapt the output depending on where the request comes from (as well as 
 which language is the broser set to).

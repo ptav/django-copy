@@ -57,9 +57,9 @@ html,body {
 
 .djangcopy-fade {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 5%;
+    left: 95%;
+    transform: translate(-100%, 0%);
     z-index: 9999;
     width: 100%;
     max-width: 300px;

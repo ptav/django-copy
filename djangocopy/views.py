@@ -1,13 +1,63 @@
 import logging
+from datetime import datetime
 from django.http import HttpResponseServerError
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.conf import settings
-
 from .models import Page
 
 
 logger = logging.getLogger(__name__)
+
+
+class BasicView():
+    """Class based views but (much) simpler"""
+    
+    FORM_TEMPLATE = None # Set to use form view default behaviour  
+    FORM_CLASS = None # Form class must be set to use default form view behaviour
+    FORM_VAR = 'form' # set if using a form variable other then 'form' in the context 
+
+    def __call__(self, request, *args, **kwargs):
+        if request.GET:
+            return self.get(request, *args, **kwargs)
+        
+        elif request.POST:
+            return self.post(request, *args, **kwargs)
+
+        else:
+            return self.unbound(request, *args, **kwargs)
+            
+    def get(self, request, *args, **kwargs):
+        form = self.FORM_CLASS(request.GET)
+        if form.is_valid():
+            return self.get_is_valid(request, form, *args, **kwargs)
+        else:
+            return self.get_not_valid(request, form, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        form = self.FORM_CLASS(request.POST)
+        if form.is_valid():
+            return self.post_is_valid(request, form, *args, **kwargs)
+        else:
+            return self.post_not_valid(request, form, *args, **kwargs)
+
+    def unbound(self, request, *args, **kwargs):
+        context = {self.FORM_VAR: self.FORM_CLASS()}
+        return render(request, self.FORM_TEMPLATE, context)
+
+    def get_is_valid(self, request, form, *args, **kwargs):
+        pass
+
+    def get_not_valid(self, request, form, *args, **kwargs):
+        context = {self.FORM_VAR: self.FORM_CLASS(form)}
+        return render(request, self.FORM_TEMPLATE, context)
+
+    def post_is_valid(self, request, form, *args, **kwargs):
+        pass
+
+    def post_not_valid(self, request, form, *args, **kwargs):
+        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS(form)}
+        return render(request, self.FORM_TEMPLATE, context)
 
 
 def static_page(request,slug):
@@ -47,51 +97,4 @@ def index(request):
         return redirect('admin:index')
     else:
         return render(request, "djangocopy/default.html")
-
-
-class BasicView():
-    FORM_CLASS = None
-    FORM_TEMPLATE = None
-    FORM_TEMPLATE_VAR = 'form'
-
-    def __call__(self, request, *args, **kwargs):
-        if request.GET:
-            return self.get(request, *args, **kwargs)
-        
-        elif request.POST:
-            return self.post(request, *args, **kwargs)
-
-        else:
-            return self.unbound(request, *args, **kwargs)
-            
-    def get(self, request, *args, **kwargs):
-        form = self.FORM_CLASS(request.GET)
-        if form.is_valid():
-            return self.get_is_valid(request, form, *args, **kwargs)
-        else:
-            return self.get_not_valid(request, form, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        form = self.FORM_CLASS(request.POST)
-        if form.is_valid():
-            return self.post_is_valid(request, form, *args, **kwargs)
-        else:
-            return self.post_not_valid(request, form, *args, **kwargs)
-
-    def unbound(self, request, *args, **kwargs):
-        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS()}
-        return render(request, self.FORM_TEMPLATE, context)
-
-    def get_is_valid(self, request, form, *args, **kwargs):
-        pass
-
-    def get_not_valid(self, request, form, *args, **kwargs):
-        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS(form)}
-        return render(request, self.FORM_TEMPLATE, context)
-
-    def post_is_valid(self, request, form, *args, **kwargs):
-        pass
-
-    def post_not_valid(self, request, form, *args, **kwargs):
-        context = {self.FORM_TEMPLATE_VAR: self.FORM_CLASS(form)}
-        return render(request, self.FORM_TEMPLATE, context)
+    

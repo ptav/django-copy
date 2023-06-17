@@ -1,9 +1,10 @@
 from user_agents import parse
 from django.conf import settings
+from django.shortcuts import redirect
 from django.utils.translation import to_locale, get_language
 from .models import Copy, PageVisit
 from .utils import get_ip_address, get_client_country_code
-
+from .cookies import CookieConsentForm, cookie_consent
 
 class CopyMiddleware:
     "Load copy for the current page"
@@ -91,3 +92,24 @@ def track_decorator(view_func):
         middleware = TrackMiddleware(view_func)
         return middleware(request, *args, **kwargs)
     return _wrapped_view_func
+
+
+class CookieConsentMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request, *args, **kwargs):
+        if not cookie_consent(request):
+            # Adds cookie consent form to request context
+            request.cookie_consent_form = CookieConsentForm()
+
+        return self.get_response(request, *args, **kwargs)
+
+    """
+    def __call__(self, request):
+        cookie_consent = request.session.get('cookie_consent')
+        if cookie_consent is None and not request.path.endswith('/__cookie_consent__/'):
+            return redirect('cookie_consent')
+        response = self.get_response(request)
+        return response
+    """

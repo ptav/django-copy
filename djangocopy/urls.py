@@ -4,6 +4,7 @@ from django.views.static import serve
 from django.conf import settings
 
 from .views import static_page, index
+from .cookies import CookieConsent
 
 
 #def unprotected_serve(request, path):
@@ -18,5 +19,7 @@ from .views import static_page, index
 #    ]
 
 urlpatterns = [
+    path('', index, name='index'),
+    path('cookie_consent/', CookieConsent(), name='cookie_consent'),
     path('<str:slug>/', static_page, name='static'),
 ]

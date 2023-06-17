@@ -5,6 +5,7 @@ from django.utils.translation import to_locale, get_language
 from django.template import Library, Node, TemplateSyntaxError
 
 from ..models import Copy
+from ..cookies import cookie_consent, has_cookie_consent
 
 
 register = Library()
@@ -36,6 +37,59 @@ def faicon(name, aria_text='', options='', aria_hidden=True):
     return mark_safe('<i class="fa fa-{} {}" aria-hidden="{}" aria-text="{}"></i>'.format(name,options,str(aria_hidden).lower(),aria_text))
 
 
+@register.simple_tag(name='cookie_consent', takes_context=True)
+def cookie_consent_tag(context):
+    """
+    Retrieve cookies consent status
+    
+    Return:
+        list of consent categories
+    """
+    request = context['request']
+    return cookie_consent(request)
+
+
+@register.simple_tag(name='has_cookie_consent', takes_context=True)
+def has_cookie_consent_tag(context, cookie_type=None):
+    """
+    Check cookies consent status
+    
+    Args:
+        cookie_type: If None, check if cookies have been configured, otherwise
+        Check specific cookie category ('necessary', 'preferences', 'functional' 
+        or 'marketing')
+    """
+    request = context['request']
+    return has_cookie_consent(request)
+
+
+@register.inclusion_tag('djangocopy/widgets/modal.html', takes_context=True)
+def insert_modal(
+    context,
+    id,
+    title = 'Replace this placeholder with a "title" argument',
+    body_template = False,
+    body_content = 'Replace this placeholder with a "body" or "body_template" argument',
+    footer_template = False,
+    footer_content = '',
+    dismissable = True,
+    fade = True,
+    show = False):
+    
+    return {
+        'id': id,
+        'title': title,
+        'body_template': body_template,
+        'body_content': body_content,
+        'footer_template': footer_template,
+        'footer_content': footer_content,
+        'dismissable': dismissable,
+        'fade': fade,
+        'show': show,
+        'request': context.request,
+    }
+
+
 @register.filter
 def list_to_2_column(objects):
     "Convert a list into 2 sub-lists of similar size. Usually used to break a long list of objects into columns"
@@ -64,7 +118,6 @@ def list_to_4_column(objects):
         return [objects[:sz],objects[sz:2*sz],objects[2*sz:3*sz],objects[3*sz:]]
     else:
         return [objects]
-
 
 
 # Based on UUID Template Tag, https://djangosnippets.org/snippets/1356/

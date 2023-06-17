@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from message.views import test_message_1, test_message_2
+from message.views import message_test, message_test_phase2
+from modal.views import modal_test
+from djangocopy.views import index
 
 urlpatterns = [
-    path('test-message-1', test_message_1, name='test-messages-1'),
-    path('test-message-2', test_message_2, name='test-messages-2'),
+    path('', index),
+    path('message-test', message_test, name='message-test'),
+    path('message-test-phase2', message_test_phase2, name='message-test-phase2'),
+    path('modal-test', modal_test, name='modal-test'),
     
     path('accounts/', include('django.contrib.auth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),

@@ -122,5 +122,3 @@ def __djangocopy_navbar__(context):
         'navbar_title': title,
         'navbar_items': elements,
     }
-
-

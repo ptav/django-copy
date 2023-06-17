@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import sys
 from pathlib import Path
-
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,9 +51,11 @@ INSTALLED_APPS = [
     'filer',
     'mptt',
     'simple_history',
+    'django_bootstrap5',
     
     'djangocopy.apps.DjangoCopyConfig',
     'message.apps.MessageConfig',
+    'modal.apps.ModalConfig',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +70,9 @@ MIDDLEWARE = [
     # Automatically inject djangocopy content into a template context
     'djangocopy.middleware.CopyMiddleware',
 
+    # Enable cookie consent checking and redirection
+    'djangocopy.middleware.CookieConsentMiddleware',
+    
     # Enable page visit tracking
     'djangocopy.middleware.TrackMiddleware',
 ]
@@ -153,6 +158,13 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Align Error messages with Bootstrap 5
+# https://docs.djangoproject.com/en/3.2/ref/settings/#message-tags
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 
 # django-copy settings

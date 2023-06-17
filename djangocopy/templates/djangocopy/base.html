@@ -1,4 +1,4 @@
-{% load i18n static djangocopy-internal %}
+{% load i18n static djangocopy-internal djangocopy  %}
 <!DOCTYPE html>
 <html lang="{% if LANGUAGE_CODE %}{{ LANGUAGE_CODE }}{% else %}en{% endif %}">
 
@@ -15,22 +15,24 @@
 <body id="{% block pageid %}{% endblock %}" class="{% block body-class %}{% endblock %}"
     {% if onload %}onload={{ onload }}{% endif %} {% if csrf_token %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
     {% endif %}>
+    
+    {% include "djangocopy/messages.html" %}
 
     <div class="d-flex flex-column min-vh-100">
         <div class="flex-fill">
-            <!-- Your main content goes here -->
             {% __djangocopy_navbar__ %}
-            {% include "djangocopy/messages.html" %}
 
             <div class="{% block djangocopy-container %}container{% endblock %}">
+                <!-- Your main content goes here -->
                 {% block content %}{% endblock %}
             </div>
-
         </div>
         {% include "djangocopy/footer.html" %}
     </div>
 
-    {% block script %}{% endblock %}
-</body>
+    {% if request.cookie_consent_form %}
+    {% insert_modal id='cookie_consent_modal' title='Cookie Consent' show=True dismissable=False body_template='djangocopy/widgets/cookie_consent_form.html' %}
+    {% endif %}
 
+    {% block script %}{% endblock %}
 </html>
