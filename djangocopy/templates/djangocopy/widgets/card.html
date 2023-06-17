@@ -1,0 +1,18 @@
+{% extends 'djangocopy/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-{% block card-width-md %}6{% endblock %} col-lg-{% block card-width-lg %}5{% endblock %}">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{% block card-title %}{% endblock %}</h4>
+        </div>
+        <div class="card-body">
+            {% block card-body %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

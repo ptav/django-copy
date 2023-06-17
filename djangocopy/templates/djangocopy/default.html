@@ -1,0 +1,26 @@
+{% extends 'djangocopy/base.html' %}
+{% load djangocopy %}
+{% block content %}
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <h1 class="text-center mb-4">Welcome to the Django-Copy default landing page</h1>
+
+    <div class="d-flex justify-content-center">
+      <a href="{% url 'modal-test' %}" class="btn btn-primary m-2" role="button">Test Modals</a>
+      <a href="{% url 'message-test' %}" class="btn btn-primary m-2" role="button">Test Messages</a>
+    </div>
+  </div>    
+  
+  <div class="row justify-content-center align-items-center">
+    <div class="col-8">
+      <h2 class="m-4">Cookie configuration</h2>
+      {% cookie_consent as cookies %}
+      <p>
+        Cookies configures? {% has_cookie_consent %}
+        <br>Cookie consent categories: {{ cookies }}
+        <br><a href="{% url 'cookie_consent' %}" class="btn btn-primary m-2" role="button">Update Cookie Consent</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'djangocopy/base.html' %}
+{% load djangocopy %}
+{% block content %}
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-md-8">
+      <h1 class="text-center mb-4">Test Modals</h1>
+
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary m-2" data-bs-toggle="modal" data-bs-target="#modal1">Popup Modal</button>
+        <button type="button" class="btn btn-secondary m-2" data-bs-toggle="modal" data-bs-target="#modal2">Hidden Modal</button>
+        <button type="button" class="btn btn-secondary m-2" data-bs-toggle="modal" data-bs-target="#modal3">Static Modal</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% insert_modal id='modal1' title='Popup Modal' body_template='modal_test_body.html' show=True %}
+{% insert_modal id='modal2' title='Hidden Modal' fade=False body_content='this modal has a footer and snaps into position' footer_content="This is a sample footer" %}
+{% insert_modal id='modal3' title='Static Modal' dismissable=False body_content='This is a static modal with a <bold>close button</bold> in the footer' footer_template='modal_test_footer.html' %}
+{% endblock content %}

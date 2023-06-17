@@ -1,0 +1,7 @@
+{% load i18n django_bootstrap5 %}
+
+<form class="form" method="POST" action={% url 'cookie_consent' %}>
+  {% csrf_token %}
+  {% bootstrap_form request.cookie_consent_form %}
+  <button class="btn btn-primary btn-block w-100 mb-3" type="submit" name="confirm">{% trans "Confirm" %}</button>
+</form>

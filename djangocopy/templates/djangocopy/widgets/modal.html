@@ -1,0 +1,34 @@
+<div class="modal {% if fade %}fade{% endif %}" id="{{ id }}" tabindex="-1"
+    aria-labelledby="results-modal-label" aria-hidden="true"
+    {% if not dismissable %}data-bs-backdrop="static" data-bs-keyboard="false"{% endif %}>
+    <div class="modal-dialog modal-{% if size %}{{ size }}{% else %}md{% endif %}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ title }}</h5>
+                {% if dismissable %}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                {% endif %}
+            </div>
+
+            {% if body_template %}
+            <div class="modal-body" id="{{ id }}-body">{% include body_template %}</div>
+            {% elif body_content %}
+            <div class="modal-body" id="{{ id }}-body">{{ body_content|safe }}</div>
+            {% endif %}
+
+            {% if footer_template %}
+            <div class="modal-footer">{% include footer_template %}</div>
+            {% elif footer_content %}
+            <div class="modal-footer">{{ footer_content|safe }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% if show %}
+<script type="text/javascript">
+  var modal_object = new bootstrap.Modal(document.getElementById("{{ id }}"), {});
+  modal_object.show();
+</script>
+{% endif %}

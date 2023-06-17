@@ -1,0 +1,14 @@
+{% extends "djangocopy/widgets/card.html" %}
+{% load i18n django_bootstrap5 %}
+
+{% block title %}{% trans "Cookie Consent" %}{% endblock %}
+
+{% block card-title %}{% trans "Cookie Consent" %}{% endblock %}
+
+{% block card-body %}
+<form class="form" method="POST">
+  {% csrf_token %}
+  {% bootstrap_form cookie_consent_form %}
+  <button class="btn btn-primary btn-block w-100 mb-3" type="submit" name="confirm">{% trans "Confirm" %}</button>
+</form>
+{% endblock %}
