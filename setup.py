@@ -23,7 +23,7 @@ setup(
     include_package_data=True,
 
     install_requires=[
-        'django>=4.0',
+        'django',
         'django-simple-history',
         'django-ckeditor',
         'django-ckeditor-filer',
