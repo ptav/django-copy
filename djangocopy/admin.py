@@ -1,5 +1,7 @@
+import re
 from django import forms
 from django.shortcuts import redirect
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -124,5 +126,21 @@ class PageVisitAdmin(admin.ModelAdmin):
         return False
 
 
-admin.site.register(Template)
+@admin.register(Template)
+class TemplateAdmin(admin.ModelAdmin):
+    model = Template
+    fields = ['label', 'template', 'get_copy_fields', 'get_src']
+    readonly_fields = ['template', 'get_copy_fields', 'get_src']
+
+    def get_copy_fields(self, obj):
+        fields = re.findall(r'{{\s*[\w\.]+\s*}}', obj.content)
+        return ', '.join(fields)
+    get_copy_fields.short_description = 'Fields'
+
+    def get_src(self, obj):
+        # print self.template source. Need to open the file and render content
+        src = obj.template.source
+        return mark_safe(src)
+    get_src.short_description = 'Source'
+
 admin.site.register(Image)

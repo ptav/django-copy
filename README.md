@@ -169,11 +169,13 @@ site to work.
 
 Generally, the workflow for creating a new site is to go to the admin panel and then:
 
-1. Create one or more templates (you can start with `djangocopy/templates/sample.html` as in the exmaple provided)
+1. Create one or more templates in `templates/djangocopy/templates` in your project folders (or you can start with those provided with Djangocopy in the folder of the same name - `simple` and `sample` are provided).
 2. Create one or more pages that depend on those templates
 3. Populate the copy for those templates (for the sample above create a plaintex entry called `paragraph` and a JSON 
 list or strings called `listitems`)
-4. Done!
+1. Done!
+
+Warning - new templates are only loaded when manage.py migrate is called. A current limitation is that an actual migration must be run for the template upload code to be run
 
 You can go further and setup a navbar as well. the navbar system is fairly complex and allows different user groups 
 to see different navbars (which can be combined in a user defined order). Defining a navbar relies on setting up a 

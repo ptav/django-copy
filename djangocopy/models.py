@@ -9,13 +9,14 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.contrib.sessions.models import Session
-from simple_history.models import HistoricalRecords
+
+if hasattr(settings, 'DJANGOCOPY_USE_HISTORY'):
+    from simple_history.models import HistoricalRecords
 
 
 class Template(models.Model):
     "HTML Templates"
-    template = models.FileField(upload_to=settings.MEDIA_ROOT)
+    template = models.FileField()
     label = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
@@ -25,11 +26,14 @@ class Template(models.Model):
 class Image(models.Model):
     "Image Files"
 
-    image = models.ImageField(upload_to=settings.DJANGOCOPY_IMAGES)
+    image = models.ImageField(upload_to='__get_image_upload_path__')
     label = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.label if self.label else self.image.name
+    
+    def __get_image_upload_path__(self, filename):
+        return os.path.join(settings.DJANGOCOPY_IMAGES, filename)
 
 
 class Page(models.Model):
@@ -44,7 +48,8 @@ class Page(models.Model):
     description = models.CharField(max_length=255,default='', blank=True)
     keywords = models.CharField(max_length=255,default='', blank=True)
 
-    history = HistoricalRecords()
+    if hasattr(settings, 'DJANGOCOPY_USE_HISTORY'):
+        history = HistoricalRecords()
 
     @property
     def get_title(self):
@@ -61,7 +66,8 @@ class Navbar(models.Model):
     z_index = models.IntegerField(default=0, help_text="The z-index determines the order of navbar items. A higher value appears first.")
     anonymous = models.BooleanField(default=False, help_text="If True, navbar is shown to anonymous users. If False (default), navbar is shown to authenticated users only.")
 
-    history = HistoricalRecords()
+    if hasattr(settings, 'DJANGOCOPY_USE_HISTORY'):
+        history = HistoricalRecords()
 
 
 class Copy(models.Model):
@@ -99,7 +105,8 @@ class Copy(models.Model):
     format = models.CharField(max_length=1,choices=FORMAT_CHOICES,default=FORMAT_PLAIN)
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default=STATUS_DRAFT)
 
-    history = HistoricalRecords()
+    if hasattr(settings, 'DJANGOCOPY_USE_HISTORY'):
+        history = HistoricalRecords()
 
 
     class Meta:
