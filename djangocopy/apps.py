@@ -5,6 +5,7 @@ from django.db.models.signals import post_migrate
 from django.conf import settings
 
 class DjangoCopyConfig(AppConfig):
+    name = 'djangocopy'
     verbose_name = "Django-copy - probably the smallest CMS framework for Django"
     default_auto_field = 'django.db.models.BigAutoField'
 
@@ -18,6 +19,7 @@ class DjangoCopyConfig(AppConfig):
 # them to the djangocopy.models.Template model. Name is set to the 
 # Templates table.
 def load_templates():
+    """"""
     base_dir = os.path.dirname(importlib.util.find_spec('djangocopy').origin)
     root_dir = os.path.join(base_dir, 'templates', 'djangocopy', 'templates')
     __create_page_templates__(root_dir)
