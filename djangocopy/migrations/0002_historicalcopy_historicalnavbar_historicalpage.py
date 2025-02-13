@@ -3,7 +3,6 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import jsonfield.fields
 import simple_history.models
 
 
@@ -44,7 +43,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(auto_created=True, blank=True, db_index=True, verbose_name='ID')),
                 ('logo', models.TextField(blank=True, help_text='A picture to use as a logo', max_length=100, null=True)),
-                ('elements', jsonfield.fields.JSONField()),
+                ('elements', models.JSONField()),
                 ('z_index', models.IntegerField(default=0, help_text='The z-index determines the order of navbar items. A higher value appears first.')),
                 ('history_id', models.AutoField(primary_key=True, serialize=False)),
                 ('history_change_reason', models.CharField(max_length=100, null=True)),

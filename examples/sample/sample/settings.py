@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'filer',
     #'mptt',
+
+    'django_extensions',
     'bootstrapform',
     'simple_history',
     'djangocopy',

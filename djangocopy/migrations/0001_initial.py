@@ -2,7 +2,6 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import jsonfield.fields
 
 
 class Migration(migrations.Migration):
@@ -35,7 +34,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('logo', models.ImageField(blank=True, help_text='A picture to use as a logo', null=True, upload_to='djangocopy/')),
-                ('elements', jsonfield.fields.JSONField()),
+                ('elements', models.JSONField()),
                 ('z_index', models.IntegerField(default=0, help_text='The z-index determines the order of navbar items. A higher value appears first.')),
                 ('groups', models.ManyToManyField(blank=True, help_text='Associate navbar with a particular user group.', to='auth.Group')),
             ],

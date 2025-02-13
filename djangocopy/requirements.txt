@@ -1,7 +1,7 @@
 markdown
 geoip2
 
-django
+Django=4.2
 django-simple-history
 django-ckeditor
 django-ckeditor-filer
