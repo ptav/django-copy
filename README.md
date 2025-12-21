@@ -3,7 +3,7 @@
 Probably the smallest and simplest CMS for Django.
 
 While it is extremely simple, it supports some features that I haven't found in other CMS frameworks. Namely you can create 
-pages for multiple languages but also for multiple locations or any conbination of both.
+pages for multiple languages but also for multiple locations or any combination of both.
 
 
 ## Usage
@@ -11,7 +11,7 @@ pages for multiple languages but also for multiple locations or any conbination 
 
 ## Installation
 
-1. Use pip to instal the latest stable release
+1. Use pip to install the latest stable release
 
     ```
     pip install django-copy
@@ -24,7 +24,7 @@ pages for multiple languages but also for multiple locations or any conbination 
 
     ```
     'django_summernote',
-    'filer'
+    'filer',
     'easy_thumbnails',
     'simple_history',
     'djangocopy',
