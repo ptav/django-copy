@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.utils.safestring import mark_safe
 from django.contrib import admin
 
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django_summernote.widgets import SummernoteWidget
 
 from .models import Template, Image, Page, Copy, Navbar, PageVisit
 
@@ -91,7 +91,7 @@ class CopyAdminForm(forms.ModelForm):
         super(CopyAdminForm, self).__init__(*args, **kwargs)
 
         if self.instance is None or self.instance.format == Copy.FORMAT_SAFE_HTML:
-            self.fields['text'].widget = CKEditorUploadingWidget()
+            self.fields['text'].widget = SummernoteWidget()
 
     class Meta:
         model = Copy

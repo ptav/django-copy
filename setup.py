@@ -25,8 +25,7 @@ setup(
     install_requires=[
         'django',
         'django-simple-history',
-        'django-ckeditor',
-        'django-ckeditor-filer',
+        'django-summernote',
         'django-filer',
         'django-bootstrap5',
         'user_agents',
