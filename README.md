@@ -70,6 +70,7 @@ Then add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project s
     DJANGOCOPY_ENABLE_HTMX = True
     DJANGOCOPY_ENABLE_FONTAWESOME = True
     DJANGOCOPY_ENABLE_ALPINEJS = True
+    DJANGOCOPY_ENABLE_JQUERY = True  # Required if using Summernote WYSIWYG editor
     ```
 
 6. If using Bootstrap, align the django ERROR message with the Bootstrap DANGER message
@@ -113,9 +114,20 @@ to configure these please add the following sample configuration in settings:
     #
 
     SUMMERNOTE_CONFIG = {
+        'iframe': True,
         'summernote': {
             'width': '100%',
             'height': '480',
+            'toolbar': [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
         },
         'attachment_upload_to': 'uploads/',
     }
