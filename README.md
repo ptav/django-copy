@@ -20,8 +20,7 @@ pip install django-copy
 Then add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
 
     ```
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_summernote',
     'easy_thumbnails',
     'filer',
     'mptt',
@@ -57,7 +56,7 @@ Then add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project s
 4. In _urls.py_ add
 
     ```
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('filer/', include('filer.urls')),
     path('copy/', include('djangocopy.urls')),
@@ -71,6 +70,7 @@ Then add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project s
     DJANGOCOPY_ENABLE_HTMX = True
     DJANGOCOPY_ENABLE_FONTAWESOME = True
     DJANGOCOPY_ENABLE_ALPINEJS = True
+    DJANGOCOPY_ENABLE_JQUERY = True  # Required if using Summernote WYSIWYG editor
     ```
 
 6. If using Bootstrap, align the django ERROR message with the Bootstrap DANGER message
@@ -96,8 +96,7 @@ Django-copy depends on the following packages that need to be installed separate
     ```
     markdown
     django-simple-history
-    django-ckeditor
-    django-ckeditor-filer
+    django-summernote
     ```
 
 to configure these please add the following sample configuration in settings:
@@ -111,14 +110,26 @@ to configure these please add the following sample configuration in settings:
     LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
-    # CKEditor
+    # Summernote
     #
 
-    CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
-    CKEDITOR_UPLOAD_PATH = 'uploads/'
-
-    CKEDITOR_CONFIGS = {
-        # as required...
+    SUMMERNOTE_CONFIG = {
+        'iframe': True,
+        'summernote': {
+            'width': '100%',
+            'height': '480',
+            'toolbar': [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
+        },
+        'attachment_upload_to': 'uploads/',
     }
     ```
 

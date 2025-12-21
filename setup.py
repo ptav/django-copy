@@ -9,7 +9,7 @@ with open(os.path.join(PATH, 'README.md'), encoding='utf-8') as fp:
 
 setup(
     name='django-copy',
-    version='0.3.1',
+    version='0.3.2',
     description='Probably the smallest and simplest CMS for the Django framework',
     long_description=DESC,
     long_description_content_type = 'text/markdown',
@@ -25,8 +25,7 @@ setup(
     install_requires=[
         'django',
         'django-simple-history',
-        'django-ckeditor',
-        'django-ckeditor-filer',
+        'django-summernote',
         'django-filer',
         'django-bootstrap5',
         'user_agents',

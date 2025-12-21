@@ -26,7 +26,7 @@ urlpatterns = [
     path('modal-test', modal_test, name='modal-test'),
     
     path('accounts/', include('django.contrib.auth.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('filer/', include('filer.urls')),
     path('copy/', include('djangocopy.urls')),
 

@@ -4,8 +4,7 @@ geoip2
 html2text
 django
 django-simple-history
-django-ckeditor
-django-ckeditor-filer
+django-summernote
 django-filer
 django-bootstrap5
 django-mptt

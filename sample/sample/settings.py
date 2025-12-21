@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_summernote',
     'easy_thumbnails',
     'filer',
     'mptt',
@@ -178,6 +177,7 @@ DJANGOCOPY_SITE_TITLE = 'Djangocopy Sample'
 DJANGOCOPY_ENABLE_BOOTSTRAP5 = True
 DJANGOCOPY_ENABLE_HTMX = True
 DJANGOCOPY_ENABLE_ALPINE = True
+DJANGOCOPY_ENABLE_JQUERY = True  # Required by Summernote
 DJANGOCOPY_USE_CDN = True
 
 
@@ -195,8 +195,24 @@ LOGIN_REDIRECT_URL = '/djangocopy/sample'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
-# CKEditor
+# Summernote
 #
 
-CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
-CKEDITOR_UPLOAD_PATH = 'uploads/'
+SUMMERNOTE_CONFIG = {
+    'iframe': True,  # Use iframe mode
+    'summernote': {
+        'width': '100%',
+        'height': '480',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+    },
+    'attachment_upload_to': 'uploads/',
+}
