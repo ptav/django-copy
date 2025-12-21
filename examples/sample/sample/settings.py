@@ -177,6 +177,9 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 #
 
 SUMMERNOTE_CONFIG = {
+    # Don't use external CDN resources  
+    'jquery': '/static/admin/js/vendor/jquery/jquery.js',
+    'disable_upload': False,
     'summernote': {
         'toolbar': [
             ['style', ['style']],
@@ -190,3 +193,6 @@ SUMMERNOTE_CONFIG = {
         ],
     },
 }
+
+# Allow Summernote iframes
+X_FRAME_OPTIONS = 'SAMEORIGIN'
