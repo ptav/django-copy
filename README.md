@@ -102,6 +102,9 @@ to configure these please add the following sample configuration in settings:
             ],
         },
     }
+    
+    # Required for Summernote iframes
+    X_FRAME_OPTIONS = 'SAMEORIGIN'
     ```
 
 
