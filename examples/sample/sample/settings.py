@@ -177,7 +177,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 #
 
 SUMMERNOTE_CONFIG = {
-    # Don't use external CDN resources  
+    # Don't use external CDN resources
     'jquery': '/static/admin/js/vendor/jquery/jquery.js',
     'disable_upload': False,
     'summernote': {

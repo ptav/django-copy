@@ -1,6 +1,6 @@
 markdown
 geoip2
 
-Django>=4.2
+Django>=4.2,<7.0
 django-simple-history
 django-summernote
