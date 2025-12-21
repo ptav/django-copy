@@ -90,7 +90,8 @@ class CopyAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CopyAdminForm, self).__init__(*args, **kwargs)
 
-        if self.instance is None or self.instance.format == Copy.FORMAT_SAFE_HTML:
+        # Show Summernote for new instances or when format is FORMAT_SAFE_HTML
+        if not self.instance.pk or self.instance.format == Copy.FORMAT_SAFE_HTML:
             self.fields['text'].widget = SummernoteWidget()
 
     class Meta:

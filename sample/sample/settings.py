@@ -198,9 +198,20 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 #
 
 SUMMERNOTE_CONFIG = {
+    'iframe': True,  # Use iframe mode
     'summernote': {
         'width': '100%',
         'height': '480',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
     },
     'attachment_upload_to': 'uploads/',
 }
