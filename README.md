@@ -23,8 +23,7 @@ pages for multiple languages but also for multiple locations or any conbination 
 2. Add `djangocopy` and it's dependencies to `INSTALLED_APPS` in the project settings (see dependencies below)
 
     ```
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_summernote',
     'filer'
     'easy_thumbnails',
     'simple_history',
@@ -58,7 +57,7 @@ by the Django template framework. For example:
 7. In _urls.py_ add
 
     ```
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('filer/', include('filer.urls')),
     path('djangocopy/', include('djangocopy.urls')),
@@ -72,8 +71,7 @@ Django-copy depends on the following packages that need to be installed separate
     ```
     markdown
     django-simple-history
-    django-ckeditor
-    django-ckeditor-filer
+    django-summernote
     ```
 
 to configure these please add the following sample configuration in settings:
@@ -87,14 +85,22 @@ to configure these please add the following sample configuration in settings:
     LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
-    # CKEditor
+    # Summernote
     #
 
-    CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
-    CKEDITOR_UPLOAD_PATH = 'uploads/'
-
-    CKEDITOR_CONFIGS = {
-        # as required...
+    SUMMERNOTE_CONFIG = {
+        'summernote': {
+            'toolbar': [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
+        },
     }
     ```
 

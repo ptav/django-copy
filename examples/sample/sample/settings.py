@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_summernote',
     'easy_thumbnails',
     'filer',
     #'mptt',
@@ -174,8 +173,20 @@ LOGIN_REDIRECT_URL = '/djangocopy/sample'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
-# CKEditor
+# Summernote
 #
 
-CKEDITOR_BASEPATH = "{}ckeditor/ckeditor/".format(STATIC_URL)
-CKEDITOR_UPLOAD_PATH = 'uploads/'
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+    },
+}
